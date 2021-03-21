@@ -12,7 +12,7 @@ const Template: Story<ButtonProps> = args => (
   <Button {...args}>{args.children}</Button>
 );
 
-export const Normal = Template.bind({});
-Normal.args = { children: "Normal Button" };
+export const Default = Template.bind({});
+Default.args = { children: "Button" };
 export const Primary = Template.bind({});
 Primary.args = { children: "Primary Button", colorScheme: "orange" };

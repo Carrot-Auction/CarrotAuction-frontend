@@ -1,10 +1,13 @@
-import { FC } from "react";
+import { Icon } from "@chakra-ui/react";
+import { CarrotIcon } from "Icons";
+import React, { FC } from "react";
 
 export const License: FC = () => {
   return (
     <>
       <div>
-        {"Icons made by "}
+        <Icon as={CarrotIcon} />
+        {" Icon made by "}
         <a href="https://www.freepik.com" title="Freepik">
           Freepik
         </a>
