@@ -1,27 +1,18 @@
 import {
   Box,
-  BoxProps,
   Flex,
-  Spacer,
   Icon,
   IconButton,
   Input,
+  InputProps,
 } from "@chakra-ui/react";
 import React, { FC, ReactNode } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { Logo } from "./Logo";
 
-const SearchInput: FC<BoxProps> = props => {
+const SearchInput: FC<InputProps> = props => {
   return (
-    <Flex h="full" {...props}>
-      <Input
-        h="full"
-        border="none"
-        color="#9B9B9B"
-        bgColor="appBG"
-        focusBorderColor="orange.500"
-        placeholder="검색어를 입력해주세요."
-      />
+    <Flex p="0 0.5rem" h="full" justifyContent="flex-start">
       <IconButton
         aria-label="Search"
         icon={<Icon as={IoSearchOutline} />}
@@ -29,11 +20,24 @@ const SearchInput: FC<BoxProps> = props => {
         color="gray.600"
         colorScheme="orange"
         fontSize="1.25rem"
-        ml="0.5rem"
+        mr="0.5rem"
         _focus={{ border: "none" }}
         h="full"
         w="auto"
         p="0.25rem"
+      />
+      <Input
+        h="full"
+        border="none"
+        color="#9B9B9B"
+        bgColor="appBG"
+        focusBorderColor="orange.500"
+        placeholder="검색어를 입력해주세요."
+        maxW="12rem"
+        _focus={{
+          maxW: "320px",
+        }}
+        {...props}
       />
     </Flex>
   );
@@ -44,14 +48,19 @@ export type HeaderProps = {
 };
 export const Header: FC<HeaderProps> = ({ rightArea }) => {
   return (
-    <Flex w="full" h="4rem" bgColor="white" p="1rem">
+    <Flex
+      w="full"
+      h="4rem"
+      bgColor="white"
+      p="1rem"
+      justifyContent="space-between"
+    >
       <Box>
         <Logo />
       </Box>
-      <Box h="full" w="full" maxW="720px">
-        <SearchInput justifyContent="center" />
+      <Box flexGrow={1} h="full" w="full">
+        <SearchInput />
       </Box>
-      <Spacer />
       {rightArea && <Box h="full">{rightArea}</Box>}
     </Flex>
   );

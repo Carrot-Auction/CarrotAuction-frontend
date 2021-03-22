@@ -1,5 +1,5 @@
 import { Icon } from "@chakra-ui/react";
-import { CarrotIcon } from "Icons";
+import { CarrotIcon } from "components/icons";
 import React, { FC } from "react";
 
 export const License: FC = () => {
