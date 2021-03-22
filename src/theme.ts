@@ -12,7 +12,7 @@ const theme = extendTheme({
     appBG: "#F9F9F9",
   },
   shadows: {
-    outline: "0 0 0 3px rgba(221, 107, 32, 0.6)",
+    outline: "0 0 0 1px rgba(221, 107, 32, 0.6)",
   },
   components: {
     Input: {

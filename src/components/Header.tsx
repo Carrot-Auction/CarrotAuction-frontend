@@ -28,14 +28,14 @@ const SearchInput: FC<InputProps> = props => {
       />
       <Input
         h="full"
-        border="none"
+        borderColor="transparent"
         color="#9B9B9B"
         bgColor="appBG"
-        focusBorderColor="orange.500"
         placeholder="검색어를 입력해주세요."
         maxW="12rem"
         _focus={{
           maxW: "320px",
+          borderColor: "orange.500",
         }}
         {...props}
       />

@@ -21,12 +21,7 @@ Default.args = {};
 
 export const LoggedOut: FC = () => {
   const LoginButton: FC = () => (
-    <Button
-      variant="outline"
-      h="full"
-      colorScheme="orange"
-      _focus={{ outline: "none" }}
-    >
+    <Button variant="outline" h="full" colorScheme="orange">
       로그인
     </Button>
   );
