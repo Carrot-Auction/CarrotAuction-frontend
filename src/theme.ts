@@ -16,6 +16,9 @@ const theme = extendTheme({
   },
   components: {
     Input: {
+      defaultProps: {
+        focusBorderColor: "orange.400",
+      },
       baseStyle: {
         _hover: {
           borderColor: "orange.400",
