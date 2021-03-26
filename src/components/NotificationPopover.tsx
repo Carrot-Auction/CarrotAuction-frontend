@@ -1,5 +1,6 @@
 import React, { FC, ReactNode } from "react";
 import {
+  Box,
   Popover,
   PopoverArrow,
   PopoverBody,
@@ -14,15 +15,20 @@ export type NotificationPopoverProps = {
 };
 export const NotificationPopover: FC<NotificationPopoverProps> = ({
   trigger,
+  children,
 }) => {
   return (
     <Popover placement="bottom-start">
-      <PopoverTrigger>{trigger}</PopoverTrigger>
-      <PopoverContent width="200px">
+      <PopoverTrigger>
+        <Box display="inline-block">{trigger}</Box>
+      </PopoverTrigger>
+      <PopoverContent width="16rem">
         <PopoverHeader>알림</PopoverHeader>
         <PopoverArrow />
         <PopoverCloseButton />
-        <PopoverBody>List Contents</PopoverBody>
+        <PopoverBody maxH="16rem" overflow="scroll">
+          {children}
+        </PopoverBody>
       </PopoverContent>
     </Popover>
   );

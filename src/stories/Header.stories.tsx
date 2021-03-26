@@ -5,9 +5,18 @@ import { Box, Button, HStack } from "@chakra-ui/react";
 import {
   Header,
   HeaderProps,
-  NotificationButton,
+  NotificationIconButton,
+  NotificationList,
+  NotificationPopover,
   SimpleUserDisplay,
 } from "components";
+
+const dummy = [...Array(10)].map((_, idx) => ({
+  id: idx,
+  pic: "https://via.placeholder.com/150",
+  title: "Notification Item " + idx,
+  desc: "Description",
+}));
 
 export default {
   title: "Components/Header",
@@ -32,7 +41,9 @@ export const LoggedIn: FC = () => {
   const RightBox: FC = () => (
     <HStack spacing={4} mt="-0.25rem">
       <Box>
-        <NotificationButton />
+        <NotificationPopover trigger={<NotificationIconButton unread />}>
+          <NotificationList items={dummy} />
+        </NotificationPopover>
       </Box>
       <SimpleUserDisplay username="김지수" />
     </HStack>
