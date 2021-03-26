@@ -5,9 +5,10 @@ import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 
 import App from "App";
+import theme from "theme";
 
 ReactDOM.render(
-  <ChakraProvider>
+  <ChakraProvider theme={theme}>
     <BrowserRouter basename={process.env.BASE_NAME}>
       <RecoilRoot>
         <App />
