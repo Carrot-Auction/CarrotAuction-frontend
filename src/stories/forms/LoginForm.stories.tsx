@@ -34,12 +34,12 @@ export const Default: React.VFC = () => (
         <VStack spacing="1rem">
           <FormControl id="username" isRequired>
             <FormLabel>아이디</FormLabel>
-            <Input />
+            <Input pattern="[a-zA-Z\d_]{4,}" />
           </FormControl>
 
           <FormControl id="password" isRequired>
             <FormLabel>패스워드</FormLabel>
-            <Input type="password" />
+            <Input type="password" pattern="(?=.*\d)(?=.*[a-z]).{8,}" />
           </FormControl>
 
           <Button w="full" type="submit">
