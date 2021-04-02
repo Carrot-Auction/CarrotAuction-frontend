@@ -46,7 +46,7 @@ export const Default: React.VFC = () => (
             <FormLabel>패스워드</FormLabel>
             <Input type="password" pattern="(?=.*\d)(?=.*[a-z]).{8,}" />
           </FormControl>
-          <FormControl id="password_repeat" isRequired>
+          <FormControl id="password_confirm" isRequired>
             <FormLabel>패스워드 확인</FormLabel>
             <Input type="password" pattern="(?=.*\d)(?=.*[a-z]).{8,}" />
           </FormControl>

@@ -63,7 +63,7 @@ const config: webpack.Configuration = {
     }),
     new HtmlWebpackPlugin({
       template: "src/index.html",
-      title: "CarrotAuction",
+      title: "당근옥션",
     }),
   ].filter(Boolean),
   devServer: {
