@@ -11,7 +11,9 @@ import {
   Heading,
   Input,
   VStack,
+  Link,
 } from "@chakra-ui/react";
+import { Link as RotueLink } from "react-router-dom";
 
 export default {
   title: "Forms/LoginForm",
@@ -45,6 +47,13 @@ export const Default: React.VFC = () => (
           <Button w="full" type="submit">
             로그인
           </Button>
+
+          <Box>
+            {"또는 "}
+            <Link as={RotueLink} to="/register">
+              회원가입
+            </Link>
+          </Box>
         </VStack>
       </form>
     </Box>

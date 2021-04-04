@@ -3,6 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import "typeface-noto-sans-kr";
 
 import theme from "theme";
+import { BrowserRouter } from "react-router-dom";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -10,6 +11,8 @@ export const parameters = {
 
 addDecorator(StoryFn => (
   <ChakraProvider theme={theme}>
-    <StoryFn />
+    <BrowserRouter>
+      <StoryFn />
+    </BrowserRouter>
   </ChakraProvider>
 ));

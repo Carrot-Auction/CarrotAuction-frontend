@@ -39,13 +39,13 @@ const SearchInput: FC<SearchInputProps> = ({ onQuery, ...props }) => {
         h="full"
         borderColor="transparent"
         bgColor="appBG"
-        maxW="12rem"
+        maxW="13rem"
         placeholder="검색어를 입력해주세요."
         _placeholder={{
           color: "#9B9B9B",
         }}
         _focus={{
-          maxW: "320px",
+          maxW: "20rem",
           borderColor: "orange.500",
         }}
         {...props}
