@@ -19,4 +19,6 @@ Default.args = {
   comments: 12,
   likes: 12,
   dday: 5,
+  favorite: false,
+  /* favoritHandle 필요 */
 };
