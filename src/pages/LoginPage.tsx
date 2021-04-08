@@ -10,10 +10,20 @@ import {
   VStack,
   Link,
 } from "@chakra-ui/react";
+import { useFormik } from "formik";
 import { Link as RotueLink } from "react-router-dom";
 
-export const LoginPage: React.FC = () => (
-  <>
+export const LoginPage: React.FC = () => {
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
+    onSubmit: values => {
+      alert(JSON.stringify(values, null, 2));
+    },
+  });
+  return (
     <Flex h="calc(100vh - 6rem)" justifyContent="center" flexDir="column">
       <Box
         m="0 auto"
@@ -26,16 +36,25 @@ export const LoginPage: React.FC = () => (
         <Heading size="md">로그인</Heading>
         <Divider m="0.5rem 0" />
 
-        <form>
+        <form onSubmit={formik.handleSubmit}>
           <VStack spacing="1rem">
             <FormControl id="username" isRequired>
               <FormLabel>아이디</FormLabel>
-              <Input pattern="[a-zA-Z\d_]{4,}" />
+              <Input
+                pattern="[a-zA-Z\d_]{4,}"
+                onChange={formik.handleChange}
+                value={formik.values.username}
+              />
             </FormControl>
 
             <FormControl id="password" isRequired>
               <FormLabel>패스워드</FormLabel>
-              <Input type="password" pattern="(?=.*\d)(?=.*[a-z]).{8,}" />
+              <Input
+                type="password"
+                pattern="(?=.*\d)(?=.*[a-z]).{6,}"
+                onChange={formik.handleChange}
+                value={formik.values.password}
+              />
             </FormControl>
 
             <Button w="full" type="submit">
@@ -52,5 +71,5 @@ export const LoginPage: React.FC = () => (
         </form>
       </Box>
     </Flex>
-  </>
-);
+  );
+};
