@@ -11,13 +11,11 @@ export const SimpleUserDisplay: FC<SimpleUserDisplayProps> = ({
   userpic,
 }) => {
   return (
-    <>
-      <Avatar
-        name={username}
-        src={userpic}
-        size="sm"
-        icon={<AiOutlineUser fontSize="1.5rem" />}
-      />
-    </>
+    <Avatar
+      name={username}
+      src={userpic}
+      size="sm"
+      icon={<AiOutlineUser fontSize="1.5rem" />}
+    />
   );
 };
