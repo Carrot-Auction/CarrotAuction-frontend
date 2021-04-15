@@ -42,32 +42,47 @@ export type ItemCardProps = {
 };
 export const ItemCard: FC<ItemCardProps> = props => {
   return (
-    <Box maxW="12rem" borderRadius="1rem" bgColor="white" overflow="hidden">
+    <Box
+      maxW="12rem"
+      borderRadius="1rem"
+      bgColor="white"
+      overflow="hidden"
+      userSelect="none"
+    >
       <Box w="12rem" h="12rem" position="relative">
         <Image src={props.imgurl} w="100%" h="100%" />
-        {props.favorite ? (
-          <Icon
-            as={AiFillStar}
-            w="1.5rem"
-            h="1.5rem"
-            position="absolute"
-            top="0.5rem"
-            right="0.5rem"
-            color="yellow.300"
-            filter="drop-shadow(1px 1px 2px gray)"
-          />
-        ) : (
-          <Icon
-            as={AiOutlineStar}
-            w="1.5rem"
-            h="1.5rem"
-            position="absolute"
-            top="0.5rem"
-            right="0.5rem"
-            color="gray"
-            filter="drop-shadow(1px 1px 1px gray)"
-          />
-        )}
+        <Box
+          position="absolute"
+          w="1.5rem"
+          h="1.5rem"
+          top="0.5rem"
+          right="0.5rem"
+          cursor="pointer"
+          onClick={() =>
+            props.favoriteHandle && props.favoriteHandle(!props.favorite)
+          }
+        >
+          {props.favorite ? (
+            <Icon
+              as={AiFillStar}
+              w="1.5rem"
+              h="1.5rem"
+              color="yellow.300"
+              filter="drop-shadow(1px 1px 2px gray)"
+            />
+          ) : (
+            <Icon
+              as={AiOutlineStar}
+              w="1.5rem"
+              h="1.5rem"
+              color="gray"
+              _hover={{
+                color: "yellow.300",
+              }}
+              filter="drop-shadow(1px 1px 1px gray)"
+            />
+          )}
+        </Box>
       </Box>
       <Box p="0.5rem" h="6.25rem">
         <Text

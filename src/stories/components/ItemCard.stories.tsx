@@ -6,6 +6,7 @@ import { ItemCard, ItemCardProps } from "components";
 export default {
   title: "Components/ItemCard",
   component: ItemCard,
+  argTypes: { favoriteHandle: { action: "favoriteHandle" } },
 } as Meta;
 
 const Template: Story<ItemCardProps> = args => <ItemCard {...args} />;
