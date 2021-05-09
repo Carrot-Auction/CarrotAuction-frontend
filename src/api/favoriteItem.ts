@@ -1,4 +1,4 @@
-import { Item } from "repo";
+import { Item } from "api";
 
 export interface Favorite {
   id: number;

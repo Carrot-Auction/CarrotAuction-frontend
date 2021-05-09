@@ -1,4 +1,3 @@
-import React, { FC } from "react";
 import { Story, Meta } from "@storybook/react";
 
 import {

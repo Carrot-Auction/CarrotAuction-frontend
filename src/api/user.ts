@@ -1,4 +1,4 @@
-import { Favorite, ItemBider } from "repo";
+import { Favorite, ItemBider } from "api";
 
 export interface User {
   id: number;
