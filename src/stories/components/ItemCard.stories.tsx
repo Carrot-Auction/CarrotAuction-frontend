@@ -6,6 +6,7 @@ import { ItemCard, ItemCardProps } from "components";
 export default {
   title: "Components/ItemCard",
   component: ItemCard,
+  argTypes: { favoriteHandle: { action: "favoriteHandle" } },
 } as Meta;
 
 const Template: Story<ItemCardProps> = args => <ItemCard {...args} />;
@@ -19,4 +20,6 @@ Default.args = {
   comments: 12,
   likes: 12,
   dday: 5,
+  favorite: false,
+  /* favoritHandle 필요 */
 };

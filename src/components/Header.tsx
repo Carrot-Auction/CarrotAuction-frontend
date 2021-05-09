@@ -6,11 +6,14 @@ import {
   Input,
   InputProps,
 } from "@chakra-ui/react";
-import React, { FC, ReactNode } from "react";
+import React, { FC, ReactNode, useRef } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { Logo } from "./Logo";
+import { Link as RouterLink } from "react-router-dom";
 
-const SearchInput: FC<InputProps> = props => {
+type SearchInputProps = { onQuery?: (query: string) => void } & InputProps;
+const SearchInput: FC<SearchInputProps> = ({ onQuery, ...props }) => {
+  const inputEl = useRef<HTMLInputElement>();
   return (
     <Flex p="0 0.5rem" h="full" justifyContent="flex-start">
       <IconButton
@@ -25,16 +28,24 @@ const SearchInput: FC<InputProps> = props => {
         h="full"
         w="auto"
         p="0.25rem"
+        onClick={() => {
+          inputEl.current.value === ""
+            ? inputEl.current.focus()
+            : onQuery && onQuery(inputEl.current.value);
+        }}
       />
       <Input
+        ref={inputEl}
         h="full"
         borderColor="transparent"
-        color="#9B9B9B"
         bgColor="appBG"
+        maxW="13rem"
         placeholder="검색어를 입력해주세요."
-        maxW="12rem"
+        _placeholder={{
+          color: "#9B9B9B",
+        }}
         _focus={{
-          maxW: "320px",
+          maxW: "20rem",
           borderColor: "orange.500",
         }}
         {...props}
@@ -56,7 +67,9 @@ export const Header: FC<HeaderProps> = ({ rightArea }) => {
       justifyContent="space-between"
     >
       <Box>
-        <Logo />
+        <RouterLink to="/">
+          <Logo />
+        </RouterLink>
       </Box>
       <Box flexGrow={1} h="full" w="full">
         <SearchInput />
