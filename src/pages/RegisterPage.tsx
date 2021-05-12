@@ -10,6 +10,7 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
+import { userRegister } from "api";
 import { useFormik } from "formik";
 import React from "react";
 
@@ -18,11 +19,17 @@ export const RegisterPage: React.FC = () => {
     initialValues: {
       username: "",
       nickname: "",
+      location: "",
       password: "",
       passwordConfirm: "",
     },
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async values => {
+      await userRegister({
+        user_id: values.username,
+        user_pw: values.password,
+        nickname: values.nickname,
+        location: values.location,
+      });
     },
     validate: values => {
       const errors: Partial<typeof values> = {};
@@ -34,6 +41,8 @@ export const RegisterPage: React.FC = () => {
       if (!values.nickname) errors.nickname = "내용을 입력해주세요!";
       else if (!/^[0-9a-zA-Z가-힣_]+$/.test(values.nickname))
         errors.nickname = "숫자, 영문, 한글만 가능합니다.";
+
+      if (!values.location) errors.location = "내용을 입력해주세요!";
 
       if (!values.password) errors.password = "내용을 입력해주세요!";
       else if (values.password.length < 6)
@@ -87,6 +96,20 @@ export const RegisterPage: React.FC = () => {
                 value={formik.values.nickname}
               />
               <FormErrorMessage>{formik.errors.nickname}</FormErrorMessage>
+            </FormControl>
+
+            <FormControl
+              id="location"
+              isRequired
+              isInvalid={formik.errors.location && formik.touched.location}
+            >
+              <FormLabel>위치</FormLabel>
+              <Input
+                name="location"
+                onChange={formik.handleChange}
+                value={formik.values.location}
+              />
+              <FormErrorMessage>{formik.errors.location}</FormErrorMessage>
             </FormControl>
 
             <FormControl

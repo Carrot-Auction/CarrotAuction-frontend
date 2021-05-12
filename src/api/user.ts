@@ -8,6 +8,12 @@ export interface User {
   user_id: string;
   user_pw: string;
 }
+export interface UserInput {
+  location: string;
+  nickname: string;
+  user_id: string;
+  user_pw: string;
+}
 export type UserView = Omit<User, "user_pw">;
 
 export const getUserList = async (): Promise<CAResponse<UserView[]>> =>
@@ -69,5 +75,29 @@ export const getUserBiderInfo = async (
   (
     await fetch(`${process.env.API_BASE_URL}/api/user/${userId}/itemBider`, {
       method: "GET",
+    })
+  ).json();
+
+export const userLogin = async (
+  userId: string,
+  userPw: string
+): Promise<CAResponse<{ user_api_response: UserView }>> =>
+  (
+    await fetch(`${process.env.API_BASE_URL}/api/user/login`, {
+      method: "POST",
+      body: JSON.stringify({
+        user_id: userId,
+        user_pw: userPw,
+      }),
+    })
+  ).json();
+
+export const userRegister = async (
+  user: UserInput
+): Promise<CAResponse<{ user_api_response: UserView }>> =>
+  (
+    await fetch(`${process.env.API_BASE_URL}/api/user/register`, {
+      method: "POST",
+      body: JSON.stringify(user),
     })
   ).json();

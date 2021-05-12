@@ -10,6 +10,7 @@ import {
   VStack,
   Link,
 } from "@chakra-ui/react";
+import { userLogin } from "api";
 import { useFormik } from "formik";
 import { Link as RotueLink } from "react-router-dom";
 
@@ -19,8 +20,8 @@ export const LoginPage: React.FC = () => {
       username: "",
       password: "",
     },
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async values => {
+      await userLogin(values.username, values.password);
     },
   });
   return (
