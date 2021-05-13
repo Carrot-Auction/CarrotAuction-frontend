@@ -1,4 +1,4 @@
-import { LoginPage, MainPage, RegisterPage } from "pages";
+import { LoginPage, MainPage, RegisterPage, SearchResultPage } from "pages";
 import React from "react";
 
 interface Rotue {
@@ -20,5 +20,9 @@ export const routes: Rotue[] = [
   {
     path: "/register",
     component: RegisterPage,
+  },
+  {
+    path: "/search",
+    component: SearchResultPage,
   },
 ];
