@@ -1,3 +1,6 @@
+import { ApiResponse } from "types";
+import { apiRequest } from "utils";
+
 interface Alarm {
   description: string;
   id: number;
@@ -5,39 +8,21 @@ interface Alarm {
   title: string;
 }
 
-export const getAlarmList = async (): Promise<CAResponse<Alarm[]>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/alarm`, {
-      method: "GET",
-    })
-  ).json();
+export const getAlarmList = async (): Promise<ApiResponse<Alarm[]>> =>
+  await apiRequest("GET", `/api/alarm`);
 
-export const createAlarm = async (): Promise<CAResponse<Alarm>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/alarm`, {
-      method: "POST",
-    })
-  ).json();
+export const createAlarm = async (): Promise<ApiResponse<Alarm>> =>
+  await apiRequest("POST", `/api/alarm`);
 
-export const updateAlarm = async (): Promise<CAResponse<Alarm>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/alarm`, {
-      method: "DELETE",
-    })
-  ).json();
+export const updateAlarm = async (
+  alarmId: number
+): Promise<ApiResponse<Alarm>> =>
+  await apiRequest("PUT", `/api/alarm/${alarmId}`);
 
 export const deleteAlarm = async (
   alarmId: number
-): Promise<CAResponse<Alarm>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/alarm/${alarmId}`, {
-      method: "DELETE",
-    })
-  ).json();
+): Promise<ApiResponse<Alarm>> =>
+  await apiRequest("DELETE", `/api/alarm/${alarmId}`);
 
-export const getAlarm = async (alarmId: number): Promise<CAResponse<Alarm>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/alarm/${alarmId}`, {
-      method: "GET",
-    })
-  ).json();
+export const getAlarm = async (alarmId: number): Promise<ApiResponse<Alarm>> =>
+  await apiRequest("GET", `/api/alarm/${alarmId}`);

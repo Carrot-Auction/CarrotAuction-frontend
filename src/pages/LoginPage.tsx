@@ -17,11 +17,11 @@ import { Link as RotueLink } from "react-router-dom";
 export const LoginPage: React.FC = () => {
   const formik = useFormik({
     initialValues: {
-      username: "",
+      email: "",
       password: "",
     },
     onSubmit: async values => {
-      await userLogin(values.username, values.password);
+      await userLogin(values);
     },
   });
   return (
@@ -39,12 +39,12 @@ export const LoginPage: React.FC = () => {
 
         <form onSubmit={formik.handleSubmit}>
           <VStack spacing="1rem">
-            <FormControl id="username" isRequired>
-              <FormLabel>아이디</FormLabel>
+            <FormControl id="email" isRequired>
+              <FormLabel>이메일</FormLabel>
               <Input
-                pattern="[a-zA-Z\d_]{4,}"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$"
                 onChange={formik.handleChange}
-                value={formik.values.username}
+                value={formik.values.email}
               />
             </FormControl>
 

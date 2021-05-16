@@ -1,4 +1,6 @@
 import { Item } from "api";
+import { ApiResponse } from "types";
+import { apiRequest } from "utils";
 
 export interface ItemBider {
   id: number;
@@ -8,41 +10,23 @@ export interface ItemBider {
   user_id: number;
 }
 
-export const getItemBiderList = async (): Promise<CAResponse<ItemBider[]>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/itemBider`, {
-      method: "GET",
-    })
-  ).json();
+export const getItemBiderList = async (): Promise<ApiResponse<ItemBider[]>> =>
+  await apiRequest("GET", `/api/itemBider`);
 
-export const createItemBider = async (): Promise<CAResponse<ItemBider>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/itemBider`, {
-      method: "POST",
-    })
-  ).json();
+export const createItemBider = async (): Promise<ApiResponse<ItemBider>> =>
+  await apiRequest("POST", `/api/itemBider`);
 
-export const updateItemBider = async (): Promise<CAResponse<ItemBider>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/itemBider`, {
-      method: "DELETE",
-    })
-  ).json();
+export const updateItemBider = async (
+  itemBiderId: number
+): Promise<ApiResponse<ItemBider>> =>
+  await apiRequest("PUT", `/api/itemBider/${itemBiderId}`);
 
 export const deleteItemBider = async (
   itemBiderId: number
-): Promise<CAResponse<ItemBider>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/itemBider/${itemBiderId}`, {
-      method: "DELETE",
-    })
-  ).json();
+): Promise<ApiResponse<ItemBider>> =>
+  await apiRequest("DELETE", `/api/itemBider/${itemBiderId}`);
 
 export const getItemBider = async (
   itemBiderId: number
-): Promise<CAResponse<ItemBider>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/itemBider/${itemBiderId}`, {
-      method: "GET",
-    })
-  ).json();
+): Promise<ApiResponse<ItemBider>> =>
+  await apiRequest("GET", `/api/itemBider/${itemBiderId}`);

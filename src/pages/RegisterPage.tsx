@@ -17,7 +17,7 @@ import React from "react";
 export const RegisterPage: React.FC = () => {
   const formik = useFormik({
     initialValues: {
-      username: "",
+      email: "",
       nickname: "",
       location: "",
       password: "",
@@ -25,8 +25,8 @@ export const RegisterPage: React.FC = () => {
     },
     onSubmit: async values => {
       await userRegister({
-        user_id: values.username,
-        user_pw: values.password,
+        email: values.email,
+        password: values.password,
         nickname: values.nickname,
         location: values.location,
       });
@@ -34,9 +34,14 @@ export const RegisterPage: React.FC = () => {
     validate: values => {
       const errors: Partial<typeof values> = {};
 
-      if (!values.username) errors.username = "내용을 입력해주세요!";
-      else if (!/^[a-zA-Z\d_]{4,}$/.test(values.username))
-        errors.username = "4글자 이상의 영문과 _만 사용이 가능합니다.";
+      if (!values.email) errors.email = "내용을 입력해주세요!";
+      else if (
+        // eslint-disable-next-line no-control-regex
+        !/^(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])$/.test(
+          values.email
+        )
+      )
+        errors.email = "4글자 이상의 영문과 _만 사용이 가능합니다.";
 
       if (!values.nickname) errors.nickname = "내용을 입력해주세요!";
       else if (!/^[0-9a-zA-Z가-힣_]+$/.test(values.nickname))
@@ -72,16 +77,16 @@ export const RegisterPage: React.FC = () => {
         <form onSubmit={formik.handleSubmit}>
           <VStack spacing="1rem">
             <FormControl
-              id="username"
+              id="email"
               isRequired
-              isInvalid={formik.errors.username && formik.touched.username}
+              isInvalid={formik.errors.email && formik.touched.email}
             >
-              <FormLabel>아이디</FormLabel>
+              <FormLabel>이메일</FormLabel>
               <Input
                 onChange={formik.handleChange}
-                value={formik.values.username}
+                value={formik.values.email}
               />
-              <FormErrorMessage>{formik.errors.username}</FormErrorMessage>
+              <FormErrorMessage>{formik.errors.email}</FormErrorMessage>
             </FormControl>
 
             <FormControl

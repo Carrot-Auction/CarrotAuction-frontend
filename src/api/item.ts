@@ -1,3 +1,6 @@
+import { ApiResponse } from "types";
+import { apiRequest } from "utils";
+
 export interface Item {
   category_id: number;
   description: string;
@@ -8,37 +11,17 @@ export interface Item {
   user_id: number;
 }
 
-export const getItemList = async (): Promise<CAResponse<Item[]>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/item`, {
-      method: "GET",
-    })
-  ).json();
+export const getItemList = async (): Promise<ApiResponse<Item[]>> =>
+  await apiRequest("GET", `/api/item`);
 
-export const createItem = async (): Promise<CAResponse<Item>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/item`, {
-      method: "POST",
-    })
-  ).json();
+export const createItem = async (): Promise<ApiResponse<Item>> =>
+  await apiRequest("POST", `/api/item`);
 
-export const updateItem = async (): Promise<CAResponse<Item>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/item`, {
-      method: "DELETE",
-    })
-  ).json();
+export const updateItem = async (itemId: number): Promise<ApiResponse<Item>> =>
+  await apiRequest("PUT", `/api/item/${itemId}`);
 
-export const deleteItem = async (itemId: number): Promise<CAResponse<Item>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/item/${itemId}`, {
-      method: "DELETE",
-    })
-  ).json();
+export const deleteItem = async (itemId: number): Promise<ApiResponse<Item>> =>
+  await apiRequest("DELETE", `/api/item/${itemId}`);
 
-export const getItem = async (itemId: number): Promise<CAResponse<Item>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/item/${itemId}`, {
-      method: "GET",
-    })
-  ).json();
+export const getItem = async (itemId: number): Promise<ApiResponse<Item>> =>
+  await apiRequest("GET", `/api/item/${itemId}`);

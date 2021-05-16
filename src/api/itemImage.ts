@@ -1,43 +1,28 @@
+import { ApiResponse } from "types";
+import { apiRequest } from "utils";
+
 interface ItemImage {
   id: number;
   url: string;
 }
 
-export const getItemImageList = async (): Promise<CAResponse<ItemImage[]>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/itemImage`, {
-      method: "GET",
-    })
-  ).json();
+export const getItemImageList = async (): Promise<ApiResponse<ItemImage[]>> =>
+  await apiRequest("GET", `/api/itemImage`);
 
-export const createItemImage = async (): Promise<CAResponse<ItemImage>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/itemImage`, {
-      method: "POST",
-    })
-  ).json();
+export const createItemImage = async (): Promise<ApiResponse<ItemImage>> =>
+  await apiRequest("POST", `/api/itemImage`);
 
-export const updateItemImage = async (): Promise<CAResponse<ItemImage>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/itemImage`, {
-      method: "DELETE",
-    })
-  ).json();
+export const updateItemImage = async (
+  itemImageId: number
+): Promise<ApiResponse<ItemImage>> =>
+  await apiRequest("PUT", `/api/itemImage/${itemImageId}`);
 
 export const deleteItemImage = async (
   itemImageId: number
-): Promise<CAResponse<ItemImage>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/itemImage/${itemImageId}`, {
-      method: "DELETE",
-    })
-  ).json();
+): Promise<ApiResponse<ItemImage>> =>
+  await apiRequest("DELETE", `/api/itemImage/${itemImageId}`);
 
 export const getItemImage = async (
   itemImageId: number
-): Promise<CAResponse<ItemImage>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/itemImage/${itemImageId}`, {
-      method: "GET",
-    })
-  ).json();
+): Promise<ApiResponse<ItemImage>> =>
+  await apiRequest("GET", `/api/itemImage/${itemImageId}`);
