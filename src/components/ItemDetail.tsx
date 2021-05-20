@@ -1,10 +1,8 @@
 import React, { FC, useState, useCallback } from "react";
 import { Box, Image, Flex, Button, Icon, Avatar } from "@chakra-ui/react";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
-import { Redirect } from "react-router";
 
-type imgurl = {
-  id: number;
+export type imgurl = {
   imgurl: string; // 각 이미지 url
 };
 
@@ -34,7 +32,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
   }, [props.imgurls, state]);
   return (
     <Flex h="calx(100vh - 6rem)" justifyContent="center" flexDir="column">
-      <Box display="flex" borderRadius="1rem" bgColor="white">
+      <Box display="flex" bgColor="white" minW="46.78rem">
         <Box marginTop="13rem">
           <Button display="inline-block" onClick={onDecrease} bgColor="white">
             <Icon as={AiFillCaretLeft} w="1.5rem" h="1.5rem" />
@@ -48,10 +46,10 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
           paddingTop="1rem"
           paddingBottom="1rem"
         >
-          <Box w="parent" bgColor="gray" textAlign="center">
+          <Box w="parent" textAlign="center">
             <Image
               src={props.imgurls[state].imgurl}
-              w="full"
+              w="46.78rem"
               h="25rem"
               display="inline-block"
               margin="0 auto"

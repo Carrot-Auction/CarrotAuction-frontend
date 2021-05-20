@@ -17,7 +17,7 @@ const App: FC = () => {
           </RouterLink>
         }
       />
-      <Box p="1rem">
+      <Box>
         {routes.map(route => (
           <Route key={route.path} {...route} />
         ))}

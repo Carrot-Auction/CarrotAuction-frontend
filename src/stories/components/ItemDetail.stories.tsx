@@ -13,12 +13,10 @@ export const Default: Story<ItemDetailProps> = Template.bind({});
 Default.args = {
   imgurls: [
     {
-      id: 0,
       imgurl:
         "http://www.jspeople.co.kr/data/file/jsmarket/3667210319_f7kLICDB_3faa45d62e3edb7038322ab991459e73947f34f8.jpg",
     },
     {
-      id: 1,
       imgurl:
         "http://fpost.co.kr/board/data/editor/1904/093e906c02611697bbc2a72e9080280c_1555372334_9463.jpg",
     },
