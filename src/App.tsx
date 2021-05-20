@@ -1,7 +1,20 @@
 import { Box } from "@chakra-ui/layout";
-import { Button } from "@chakra-ui/react";
+import {
+  Button,
+  HStack,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import { useUserState } from "atoms/authState";
-import { Header } from "components";
+import {
+  Header,
+  NotificationIconButton,
+  NotificationList,
+  NotificationPopover,
+  SimpleUserDisplay,
+} from "components";
 import { useQuery } from "hooks/useQuery";
 import React, { FC, Suspense } from "react";
 import {
@@ -11,9 +24,12 @@ import {
   useLocation,
 } from "react-router-dom";
 import { routes } from "routes";
+import { CgProfile, CgLogOut } from "react-icons/cg";
+import useLogout from "hooks/useLogout";
 
 const UserProfile: FC = () => {
   const [user] = useUserState();
+  const logout = useLogout();
   return user === null ? (
     <RouterLink to="/login">
       <Button variant="outline" h="full" colorScheme="orange">
@@ -21,7 +37,33 @@ const UserProfile: FC = () => {
       </Button>
     </RouterLink>
   ) : (
-    <>{"Loggedin"}</>
+    <HStack spacing={4} mt="-0.25rem">
+      <Box>
+        <NotificationPopover trigger={<NotificationIconButton unread />}>
+          <NotificationList items={[]} />
+        </NotificationPopover>
+      </Box>
+      <Menu>
+        <MenuButton>
+          <SimpleUserDisplay username={user.nickname} />
+        </MenuButton>
+        <MenuList>
+          <MenuItem icon={<CgProfile />}>프로필</MenuItem>
+          <MenuItem
+            icon={<CgLogOut />}
+            onClick={() => {
+              try {
+                logout();
+              } catch (err) {
+                console.log(err.message);
+              }
+            }}
+          >
+            로그아웃
+          </MenuItem>
+        </MenuList>
+      </Menu>
+    </HStack>
   );
 };
 

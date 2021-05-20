@@ -52,6 +52,9 @@ export const userLogin = async (
 ): Promise<ApiResponse<UserView>> =>
   await apiRequest("POST", "/api/user/login", payload);
 
+export const userLogout = async (): Promise<ApiResponse<string>> =>
+  await apiRequest("GET", "/api/user/logout");
+
 export const userRegister = async (
   payload: UserRegisterInput
 ): Promise<ApiResponse<UserView>> =>
