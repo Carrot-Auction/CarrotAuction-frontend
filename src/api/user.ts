@@ -29,6 +29,9 @@ export const deleteUser = async (userId: number): Promise<ApiResponse<User>> =>
 export const getUser = async (userId: number): Promise<ApiResponse<UserView>> =>
   await apiRequest("GET", `/api/user/${userId}`);
 
+export const getLoginUser = async (): Promise<ApiResponse<UserView>> =>
+  await apiRequest("GET", `/api/user/loginUser`);
+
 export const getUserFavorites = async (
   userId: number
 ): Promise<ApiResponse<Favorite[]>> =>

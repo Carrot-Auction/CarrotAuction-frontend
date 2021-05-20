@@ -50,7 +50,10 @@ const config: webpack.Configuration = {
     new DefinePlugin({
       "process.env": {
         BASE_NAME: JSON.stringify(process.env.BASE_NAME ?? "/"),
-        API_BASE_URL: JSON.stringify(process.env.API_BASE_URL ?? ""),
+        API_BASE_URL: JSON.stringify(
+          process.env.API_BASE_URL ?? "https://carrotauction.shop"
+        ),
+        __DEV__: JSON.stringify(process.env.NODE_ENV === "development"),
       },
     }),
     new CopyWebpackPlugin({ patterns: [{ from: "src/static" }] }),

@@ -1,6 +1,6 @@
 export interface ApiResponse<T> {
   transaction_time: string;
-  result_code: string;
+  result_code: "ERROR" | "OK";
   description: string;
   pagination?: Pagination;
   data: T;

@@ -12,13 +12,16 @@ export default async function apiRequest<D = void, R = void>(
     const requestData: ApiRequest<D> = { data };
     body = JSON.stringify(requestData);
   }
-  return await (
+  const res: ApiResponse<R> = await (
     await fetch(`${process.env.API_BASE_URL}${path}`, {
       method,
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },
       body,
     })
   ).json();
+  if (res.result_code === "ERROR") throw Error(res.description);
+  return res;
 }

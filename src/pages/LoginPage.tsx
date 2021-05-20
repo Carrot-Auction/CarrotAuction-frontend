@@ -10,18 +10,23 @@ import {
   VStack,
   Link,
 } from "@chakra-ui/react";
-import { userLogin } from "api";
 import { useFormik } from "formik";
+import useLogin from "hooks/useLogin";
 import { Link as RotueLink } from "react-router-dom";
 
 export const LoginPage: React.FC = () => {
+  const login = useLogin();
   const formik = useFormik({
     initialValues: {
       email: "",
       password: "",
     },
     onSubmit: async values => {
-      await userLogin(values);
+      try {
+        await login(values);
+      } catch (err) {
+        alert(err.message);
+      }
     },
   });
   return (

@@ -10,11 +10,12 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
-import { userRegister } from "api";
 import { useFormik } from "formik";
+import useSignup from "hooks/useSignup";
 import React from "react";
 
 export const RegisterPage: React.FC = () => {
+  const signup = useSignup();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -24,12 +25,16 @@ export const RegisterPage: React.FC = () => {
       passwordConfirm: "",
     },
     onSubmit: async values => {
-      await userRegister({
-        email: values.email,
-        password: values.password,
-        nickname: values.nickname,
-        location: values.location,
-      });
+      try {
+        await signup({
+          email: values.email,
+          password: values.password,
+          nickname: values.nickname,
+          location: values.location,
+        });
+      } catch (err) {
+        alert(err.message);
+      }
     },
     validate: values => {
       const errors: Partial<typeof values> = {};

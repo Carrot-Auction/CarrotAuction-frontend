@@ -1,11 +1,6 @@
 import React, { FC } from "react";
 import { Badge, Box, HStack, Icon, Image, Text } from "@chakra-ui/react";
-import {
-  AiOutlineComment,
-  AiOutlineHeart,
-  AiOutlineStar,
-  AiFillStar,
-} from "react-icons/ai";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 
 export type ItemCardProps = {
   /**
@@ -24,10 +19,6 @@ export type ItemCardProps = {
    * 현재 가격
    */
   price: number;
-  /**
-   * 덧글 수
-   */
-  comments: number;
   /**
    * 좋아요 수
    */
@@ -64,20 +55,20 @@ export const ItemCard: FC<ItemCardProps> = props => {
         >
           {props.favorite ? (
             <Icon
-              as={AiFillStar}
+              as={AiFillHeart}
               w="1.5rem"
               h="1.5rem"
-              color="yellow.300"
+              color="pink.300"
               filter="drop-shadow(1px 1px 2px gray)"
             />
           ) : (
             <Icon
-              as={AiOutlineStar}
+              as={AiOutlineHeart}
               w="1.5rem"
               h="1.5rem"
               color="gray"
               _hover={{
-                color: "yellow.300",
+                color: "pink.300",
               }}
               filter="drop-shadow(1px 1px 1px gray)"
             />
@@ -110,10 +101,6 @@ export const ItemCard: FC<ItemCardProps> = props => {
         >
           <Text fontWeight="semibold">{`D-${props.dday}`}</Text>
           <HStack justifyContent="flex-end">
-            <Box>
-              <Icon as={AiOutlineComment} />
-              {props.comments}
-            </Box>
             <Box>
               <Icon as={AiOutlineHeart} />
               {props.likes}
