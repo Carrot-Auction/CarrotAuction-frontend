@@ -76,7 +76,7 @@ const config: webpack.Configuration = {
     overlay: true,
     historyApiFallback: true,
   },
-  devtool: development ? "inline-source-map" : undefined,
+  devtool: development ? "inline-source-map" : false,
 };
 
 if (development) {

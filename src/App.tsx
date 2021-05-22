@@ -22,7 +22,7 @@ const App: FC = () => {
           location.pathname === "/search" ? queries.get("q") : undefined
         }
       />
-      <Box p="1rem">
+      <Box>
         {routes.map(route => (
           <Route key={route.path} {...route} />
         ))}

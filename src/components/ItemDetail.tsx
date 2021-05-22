@@ -20,7 +20,7 @@ export type ItemDetailProps = {
 };
 
 export const ItemDetail: FC<ItemDetailProps> = props => {
-  const [state, stateset] = useState(0);
+  const [state] = useState(0);
   return (
     <Flex h="calx(100vh - 6rem)" justifyContent="center" flexDir="column">
       <Box

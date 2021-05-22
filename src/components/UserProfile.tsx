@@ -7,7 +7,7 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-import { useUserState } from "atoms/authState";
+import { useCurrentUserState } from "atoms/currentUserState";
 import {
   NotificationIconButton,
   NotificationList,
@@ -21,7 +21,7 @@ import { useHistory, Link as RouterLink } from "react-router-dom";
 
 export const UserProfile: React.FC = () => {
   const history = useHistory();
-  const [user] = useUserState();
+  const [user] = useCurrentUserState();
   const logout = useLogout();
   return user === null ? (
     <RouterLink to="/login">
