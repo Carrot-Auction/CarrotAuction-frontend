@@ -58,7 +58,7 @@ export const MainPage: React.FC = () => {
   ];
   return (
     <>
-      <Box maxW="1080px" m="auto">
+      <Box maxW="1080px" m="auto" p="1rem">
         <VStack spacing={10}>
           <Box>
             <Heading size="md">마감임박 상품</Heading>
