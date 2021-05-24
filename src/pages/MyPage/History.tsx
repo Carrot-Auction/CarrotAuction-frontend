@@ -45,13 +45,14 @@ const OrderTable: FC = () => {
     <Table variant="simple">
       <Thead>
         <Tr>
-          <Th w="60%">상품명</Th>
+          <Th w="50%">상품명</Th>
           <Th w="10%">상태</Th>
           <Th w="10%" isNumeric>
             호가
           </Th>
           <Th w="10%">등록일</Th>
           <Th w="10%">마감일</Th>
+          <Th w="10%">판매자</Th>
         </Tr>
       </Thead>
       <Tbody>
@@ -61,6 +62,7 @@ const OrderTable: FC = () => {
           <Td isNumeric>100원</Td>
           <Td>2020.01.01</Td>
           <Td>2020.01.01</Td>
+          <Td>홍길동</Td>
         </Tr>
         <Tr>
           <Td>공구</Td>
@@ -68,6 +70,7 @@ const OrderTable: FC = () => {
           <Td isNumeric>100원</Td>
           <Td>2020.01.01</Td>
           <Td>2020.01.01</Td>
+          <Td>철수</Td>
         </Tr>
         <Tr>
           <Td>TV</Td>
@@ -75,6 +78,7 @@ const OrderTable: FC = () => {
           <Td isNumeric>100원</Td>
           <Td>2020.01.01</Td>
           <Td>2020.01.01</Td>
+          <Td>영희</Td>
         </Tr>
       </Tbody>
     </Table>
