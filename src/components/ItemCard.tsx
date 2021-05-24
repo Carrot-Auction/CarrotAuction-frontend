@@ -39,6 +39,7 @@ export const ItemCard: FC<ItemCardProps> = props => {
       bgColor="white"
       overflow="hidden"
       userSelect="none"
+      border="1px solid #eee"
     >
       <Box w="12rem" h="12rem" position="relative">
         <Image src={props.imgurl} w="100%" h="100%" />

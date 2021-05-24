@@ -10,7 +10,6 @@ import React, { FC, ReactNode, useRef } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import { Logo } from "./Logo";
 import { Link as RouterLink } from "react-router-dom";
-import { HamburgerIcon } from "@chakra-ui/icons";
 
 type SearchInputProps = { onQuery?: (query: string) => void } & InputProps;
 const SearchInput: FC<SearchInputProps> = ({ onQuery, ...props }) => {
@@ -83,15 +82,6 @@ export const Header: FC<HeaderProps> = ({
       direction="row"
       justifyContent="space-between"
     >
-      <Box>
-        <IconButton
-          size="sm"
-          variant="outline"
-          colorScheme="orange"
-          aria-label="toggle menu"
-          icon={<HamburgerIcon />}
-        />
-      </Box>
       <Box>
         <RouterLink to="/">
           <Logo />

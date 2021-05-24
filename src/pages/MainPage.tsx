@@ -1,9 +1,12 @@
 import { Heading, HStack, VStack } from "@chakra-ui/layout";
-import { Box, Divider } from "@chakra-ui/react";
+import { Box, Divider, IconButton, Tooltip } from "@chakra-ui/react";
 import { ItemCard } from "components";
 import React from "react";
+import { FaPlus } from "react-icons/fa";
+import { useHistory } from "react-router";
 
 export const MainPage: React.FC = () => {
+  const history = useHistory();
   const dummy = [
     {
       title: "상품이름12345678901234567890",
@@ -81,6 +84,19 @@ export const MainPage: React.FC = () => {
           </Box>
         </VStack>
       </Box>
+      <Tooltip label="상품 등록">
+        <IconButton
+          position="fixed"
+          bottom="1rem"
+          right="1rem"
+          aria-label="Search database"
+          icon={<FaPlus />}
+          colorScheme="orange"
+          size="lg"
+          borderRadius="full"
+          onClick={() => history.push("/addItem")}
+        />
+      </Tooltip>
     </>
   );
 };

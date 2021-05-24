@@ -17,6 +17,7 @@ import {
 import useLogout from "hooks/useLogout";
 import React from "react";
 import { CgLogOut, CgProfile } from "react-icons/cg";
+import { MdSettings } from "react-icons/md";
 import { useHistory, Link as RouterLink } from "react-router-dom";
 
 export const UserProfile: React.FC = () => {
@@ -43,6 +44,12 @@ export const UserProfile: React.FC = () => {
         <MenuList>
           <MenuItem
             icon={<CgProfile />}
+            onClick={() => history.push(`/user/${user.id}`)}
+          >
+            프로필
+          </MenuItem>
+          <MenuItem
+            icon={<MdSettings />}
             onClick={() => history.push("/mypage")}
           >
             마이페이지
