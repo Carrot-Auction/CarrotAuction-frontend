@@ -66,7 +66,7 @@ const Favorite: FC = () => {
         p="1rem"
       >
         {dummy.map((item, idx) => (
-          <ItemCard key={idx} {...item} favorite />
+          <ItemCard key={idx} id={idx} {...item} favorite />
         ))}
       </HStack>
     </>

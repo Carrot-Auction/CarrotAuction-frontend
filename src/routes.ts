@@ -1,9 +1,11 @@
 import {
+  ItemDetailPage,
   LoginPage,
   MainPage,
   MyPage,
   RegisterPage,
   SearchResultPage,
+  UserProfilePage,
 } from "pages";
 import React from "react";
 
@@ -34,5 +36,13 @@ export const routes: Rotue[] = [
   {
     path: "/mypage",
     component: MyPage,
+  },
+  {
+    path: "/items/:id",
+    component: ItemDetailPage,
+  },
+  {
+    path: "/users/:id",
+    component: UserProfilePage,
   },
 ];

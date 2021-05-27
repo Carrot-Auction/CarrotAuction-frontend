@@ -23,8 +23,8 @@ const History: FC = () => {
 
       <Tabs colorScheme="orange">
         <TabList>
-          <Tab>구입</Tab>
-          <Tab>판매</Tab>
+          <Tab>입찰기록</Tab>
+          <Tab>판매기록</Tab>
         </TabList>
 
         <TabPanels>

@@ -68,7 +68,7 @@ export const MainPage: React.FC = () => {
             <Divider mb={2} mt={2} />
             <HStack alignItems="flex-start" justifyContent="center" spacing={5}>
               {dummy.map((item, idx) => (
-                <ItemCard key={idx} {...item} />
+                <ItemCard key={idx} id={idx} {...item} />
               ))}
             </HStack>
           </Box>
@@ -78,7 +78,7 @@ export const MainPage: React.FC = () => {
             <Divider mb={2} mt={2} />
             <HStack alignItems="flex-start" justifyContent="center" spacing={5}>
               {dummy.map((item, idx) => (
-                <ItemCard key={idx} {...item} />
+                <ItemCard key={idx} id={idx} {...item} />
               ))}
             </HStack>
           </Box>
@@ -90,9 +90,10 @@ export const MainPage: React.FC = () => {
           bottom="1rem"
           right="1rem"
           aria-label="Search database"
-          icon={<FaPlus />}
+          icon={<FaPlus size="2em" />}
           colorScheme="orange"
-          size="lg"
+          w="3.5em"
+          h="3.5em"
           borderRadius="full"
           onClick={() => history.push("/addItem")}
         />

@@ -44,7 +44,7 @@ export const UserProfile: React.FC = () => {
         <MenuList>
           <MenuItem
             icon={<CgProfile />}
-            onClick={() => history.push(`/user/${user.id}`)}
+            onClick={() => history.push(`/users/${user.id}`)}
           >
             프로필
           </MenuItem>

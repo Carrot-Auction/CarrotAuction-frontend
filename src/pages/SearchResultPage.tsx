@@ -67,7 +67,7 @@ export const SearchResultPage: React.FC = () => {
             <Divider mb={2} mt={2} />
             <HStack alignItems="flex-start" justifyContent="center" spacing={5}>
               {dummy.map((item, idx) => (
-                <ItemCard key={idx} {...item} />
+                <ItemCard key={idx} id={idx} {...item} />
               ))}
             </HStack>
           </Box>

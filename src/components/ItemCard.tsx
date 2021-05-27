@@ -1,6 +1,15 @@
 import React, { FC } from "react";
-import { Badge, Box, HStack, Icon, Image, Text } from "@chakra-ui/react";
+import {
+  Badge,
+  Box,
+  HStack,
+  Icon,
+  Image,
+  LinkBox,
+  Text,
+} from "@chakra-ui/react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export type ItemCardProps = {
   /**
@@ -28,12 +37,16 @@ export type ItemCardProps = {
    */
   dday: number;
 
+  id: number;
+
   favorite?: boolean;
   favoriteHandle?: (value: boolean) => void;
 };
 export const ItemCard: FC<ItemCardProps> = props => {
   return (
-    <Box
+    <LinkBox
+      as={Link}
+      to={`/items/${props.id}`}
       maxW="12rem"
       borderRadius="1rem"
       bgColor="white"
@@ -50,9 +63,10 @@ export const ItemCard: FC<ItemCardProps> = props => {
           top="0.5rem"
           right="0.5rem"
           cursor="pointer"
-          onClick={() =>
-            props.favoriteHandle && props.favoriteHandle(!props.favorite)
-          }
+          onClick={e => {
+            props.favoriteHandle && props.favoriteHandle(!props.favorite);
+            e.preventDefault();
+          }}
         >
           {props.favorite ? (
             <Icon
@@ -109,6 +123,6 @@ export const ItemCard: FC<ItemCardProps> = props => {
           </HStack>
         </HStack>
       </Box>
-    </Box>
+    </LinkBox>
   );
 };
