@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Divider, Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { ItemDetail, ItemDetailProps } from "components/ItemDetail";
 import { ItemCard, ItemCardProps } from "components/ItemCard";
 /*

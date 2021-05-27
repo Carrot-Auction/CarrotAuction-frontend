@@ -1,6 +1,7 @@
 import React, { FC, useState, useCallback } from "react";
 import { Box, Image, Flex, Button, Icon, Avatar } from "@chakra-ui/react";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
+import { Chat } from "components/Chat";
 
 export type imgurl = {
   imgurl: string; // 각 이미지 url
@@ -77,6 +78,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                       fontSize="0.8rem"
                       marginTop="0.1rem"
                       filter="drop-shadow(1px 1px 1px gray)"
+                      onClick={() => Chat}
                     >
                       1:1채팅
                     </Button>
