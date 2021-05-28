@@ -8,6 +8,7 @@ import {
   Input,
   VStack,
 } from "@chakra-ui/react";
+import { updateUser } from "api";
 import { useCurrentUserState } from "atoms";
 import { useFormik } from "formik";
 import React, { FC } from "react";
@@ -21,8 +22,14 @@ const Edit: FC = () => {
       password: "",
       passwordConfirm: "",
     },
-    onSubmit: async () => {
-      return;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    onSubmit: async ({ passwordConfirm, ...values }) => {
+      try {
+        const res = await updateUser({ id: currentUserState.id, ...values });
+        if (res.result_code === "OK") alert("수정하였습니다.");
+      } catch (err) {
+        alert(err.message);
+      }
     },
     validate: values => {
       const errors: Partial<typeof values> = {};

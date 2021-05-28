@@ -14,14 +14,19 @@ export type UserRegisterInput = Omit<
   User,
   "item_bider_api_response_list" | "id"
 >;
+export type UserUpdateInput = Omit<
+  User,
+  "item_bider_api_response_list" | "password" | "email"
+>;
 export type UserLoginInput = Pick<User, "email" | "password">;
 export type UserView = Omit<User, "password">;
 
 export const getUserList = async (): Promise<ApiResponse<UserView[]>> =>
   await apiRequest("GET", `/api/user`);
 
-export const updateUser = async (): Promise<ApiResponse<User>> =>
-  await apiRequest("PUT", `/api/user`);
+export const updateUser = async (
+  payload: UserUpdateInput
+): Promise<ApiResponse<User>> => await apiRequest("PUT", `/api/user`, payload);
 
 export const deleteUser = async (userId: number): Promise<ApiResponse<User>> =>
   await apiRequest("DELETE", `/api/user/${userId}`);
