@@ -50,6 +50,10 @@ const config: webpack.Configuration = {
     new DefinePlugin({
       "process.env": {
         BASE_NAME: JSON.stringify(process.env.BASE_NAME ?? "/"),
+        API_BASE_URL: JSON.stringify(
+          process.env.API_BASE_URL ?? "https://carrotauction.shop"
+        ),
+        __DEV__: JSON.stringify(process.env.NODE_ENV === "development"),
       },
     }),
     new CopyWebpackPlugin({ patterns: [{ from: "src/static" }] }),
@@ -72,7 +76,7 @@ const config: webpack.Configuration = {
     overlay: true,
     historyApiFallback: true,
   },
-  devtool: development ? "inline-source-map" : undefined,
+  devtool: development ? "inline-source-map" : false,
 };
 
 if (development) {

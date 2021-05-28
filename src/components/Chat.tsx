@@ -6,7 +6,6 @@ import {
   Icon,
   Input,
   Button,
-  VStack,
   Flex,
 } from "@chakra-ui/react";
 import React, { FC, useState } from "react";

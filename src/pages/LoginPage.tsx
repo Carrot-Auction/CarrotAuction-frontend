@@ -10,17 +10,42 @@ import {
   VStack,
   Link,
 } from "@chakra-ui/react";
+import { useAlreadyLoggedInState } from "atoms";
 import { useFormik } from "formik";
-import { Link as RotueLink } from "react-router-dom";
+import useLogin from "hooks/useLogin";
+import { Link as RotueLink, useHistory } from "react-router-dom";
 
 export const LoginPage: React.FC = () => {
+  const loggedInLoadable = useAlreadyLoggedInState();
+  const history = useHistory();
+  switch (loggedInLoadable.state) {
+    case "loading": {
+      return null;
+    }
+    case "hasError":
+    case "hasValue": {
+      const isLoggedIn = loggedInLoadable.contents;
+      if (isLoggedIn) {
+        history.push("/");
+        return null;
+      } else return <LoginContent />;
+    }
+  }
+};
+
+const LoginContent: React.FC = () => {
+  const login = useLogin();
   const formik = useFormik({
     initialValues: {
-      username: "",
+      email: "",
       password: "",
     },
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async values => {
+      try {
+        await login(values);
+      } catch (err) {
+        alert(err.message);
+      }
     },
   });
   return (
@@ -38,12 +63,12 @@ export const LoginPage: React.FC = () => {
 
         <form onSubmit={formik.handleSubmit}>
           <VStack spacing="1rem">
-            <FormControl id="username" isRequired>
-              <FormLabel>아이디</FormLabel>
+            <FormControl id="email" isRequired>
+              <FormLabel>이메일</FormLabel>
               <Input
-                pattern="[a-zA-Z\d_]{4,}"
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2, 4}$"
                 onChange={formik.handleChange}
-                value={formik.values.username}
+                value={formik.values.email}
               />
             </FormControl>
 

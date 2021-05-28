@@ -1,12 +1,11 @@
 import { Heading, HStack, VStack } from "@chakra-ui/layout";
-import { Box, Divider, IconButton, Tooltip } from "@chakra-ui/react";
+import { Box, Divider } from "@chakra-ui/react";
 import { ItemCard } from "components";
+import { useQuery } from "hooks/useQuery";
 import React from "react";
-import { FaPlus } from "react-icons/fa";
-import { useHistory } from "react-router";
 
-export const MainPage: React.FC = () => {
-  const history = useHistory();
+export const SearchResultPage: React.FC = () => {
+  const query = useQuery();
   const dummy = [
     {
       title: "상품이름12345678901234567890",
@@ -61,20 +60,10 @@ export const MainPage: React.FC = () => {
   ];
   return (
     <>
-      <Box maxW="1080px" m="auto" p="1rem">
+      <Box maxW="1080px" m="auto">
         <VStack spacing={10}>
           <Box>
-            <Heading size="md">마감임박 상품</Heading>
-            <Divider mb={2} mt={2} />
-            <HStack alignItems="flex-start" justifyContent="center" spacing={5}>
-              {dummy.map((item, idx) => (
-                <ItemCard key={idx} id={idx} {...item} />
-              ))}
-            </HStack>
-          </Box>
-
-          <Box>
-            <Heading size="md">최근 등록된 상품</Heading>
+            <Heading size="md">{`"${query.get("q")}" 검색 결과`}</Heading>
             <Divider mb={2} mt={2} />
             <HStack alignItems="flex-start" justifyContent="center" spacing={5}>
               {dummy.map((item, idx) => (
@@ -84,20 +73,6 @@ export const MainPage: React.FC = () => {
           </Box>
         </VStack>
       </Box>
-      <Tooltip label="상품 등록">
-        <IconButton
-          position="fixed"
-          bottom="1rem"
-          right="1rem"
-          aria-label="Search database"
-          icon={<FaPlus size="2em" />}
-          colorScheme="orange"
-          w="3.5em"
-          h="3.5em"
-          borderRadius="full"
-          onClick={() => history.push("/addItem")}
-        />
-      </Tooltip>
     </>
   );
 };

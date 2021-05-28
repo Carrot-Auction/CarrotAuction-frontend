@@ -1,4 +1,6 @@
 import { Item } from "api";
+import { ApiResponse } from "types";
+import { apiRequest } from "utils";
 
 export interface Favorite {
   id: number;
@@ -7,41 +9,23 @@ export interface Favorite {
   item_api_response: Item;
 }
 
-export const getFavoriteList = async (): Promise<CAResponse<Favorite[]>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/favoriteItem`, {
-      method: "GET",
-    })
-  ).json();
+export const getFavoriteList = async (): Promise<ApiResponse<Favorite[]>> =>
+  await apiRequest("GET", `/api/favoriteItem`);
 
-export const createFavorite = async (): Promise<CAResponse<Favorite>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/favoriteItem`, {
-      method: "POST",
-    })
-  ).json();
+export const createFavorite = async (): Promise<ApiResponse<Favorite>> =>
+  await apiRequest("POST", `/api/favoriteItem`);
 
-export const updateFavorite = async (): Promise<CAResponse<Favorite>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/favoriteItem`, {
-      method: "DELETE",
-    })
-  ).json();
+export const updateFavorite = async (
+  favoriteId: number
+): Promise<ApiResponse<Favorite>> =>
+  await apiRequest("PUT", `/api/favoriteItem/${favoriteId}`);
 
 export const deleteFavorite = async (
   favoriteId: number
-): Promise<CAResponse<Favorite>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/favoriteItem/${favoriteId}`, {
-      method: "DELETE",
-    })
-  ).json();
+): Promise<ApiResponse<Favorite>> =>
+  await apiRequest("DELETE", `/api/favoriteItem/${favoriteId}`);
 
 export const getFavorite = async (
   favoriteId: number
-): Promise<CAResponse<Favorite>> =>
-  (
-    await fetch(`${process.env.API_BASE_URL}/api/favoriteItem/${favoriteId}`, {
-      method: "GET",
-    })
-  ).json();
+): Promise<ApiResponse<Favorite>> =>
+  await apiRequest("GET", `/api/favoriteItem/${favoriteId}`);

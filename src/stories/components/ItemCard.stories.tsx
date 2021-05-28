@@ -17,7 +17,6 @@ Default.args = {
   imgurl: "https://via.placeholder.com/150",
   location: "상도동",
   price: 1000,
-  comments: 12,
   likes: 12,
   dday: 5,
   favorite: false,
