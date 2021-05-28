@@ -1,7 +1,33 @@
-import { Box } from "@chakra-ui/react";
-import { FC } from "react";
+import { Box } from "@chakra-ui/layout";
+import { Header, UserProfile } from "components";
+import { useQuery } from "hooks/useQuery";
+import React, { FC, Suspense } from "react";
+import { Route, useHistory, useLocation } from "react-router-dom";
+import { routes } from "routes";
 
 const App: FC = () => {
-  return <Box>{"Hello world"}</Box>;
+  const history = useHistory();
+  const location = useLocation();
+  const queries = useQuery();
+  return (
+    <>
+      <Header
+        rightArea={
+          <Suspense fallback={<div>Loading...</div>}>
+            <UserProfile />
+          </Suspense>
+        }
+        onSearch={q => history.push(`/search?q=${encodeURIComponent(q)}`)}
+        searchValue={
+          location.pathname === "/search" ? queries.get("q") : undefined
+        }
+      />
+      <Box flexGrow={1}>
+        {routes.map(route => (
+          <Route key={route.path} {...route} />
+        ))}
+      </Box>
+    </>
+  );
 };
 export default App;
