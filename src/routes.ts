@@ -1,4 +1,5 @@
 import {
+  AddItemPage,
   ItemDetailPage,
   LoginPage,
   MainPage,
@@ -44,5 +45,9 @@ export const routes: Rotue[] = [
   {
     path: "/users/:id",
     component: UserProfilePage,
+  },
+  {
+    path: "/addItem",
+    component: AddItemPage,
   },
 ];

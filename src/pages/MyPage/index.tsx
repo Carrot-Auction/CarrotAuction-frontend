@@ -34,7 +34,7 @@ export const MyPage: React.FC = () => {
 const MyPageContent: React.FC = () => {
   return (
     <Flex p="1rem" flexDir="row" gridGap="3" h="full">
-      <Box borderRadius="1rem" bgColor="white" p="1rem" w="18rem">
+      <Box borderRadius="1rem" bgColor="white" p="1rem" minW="14rem">
         <List spacing={3}>
           <ListItem>
             <Link as={RouterLink} to="/mypage/edit">

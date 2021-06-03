@@ -9,6 +9,7 @@
     "dev": "cross-env NODE_ENV=\"development\" TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack serve --open --config webpack.config.ts",
     "build": "cross-env NODE_ENV=\"production\" TS_NODE_PROJECT=\"tsconfig.webpack.json\" webpack --config webpack.config.ts",
     "lint": "eslint src --ext .ts,.tsx,.js,.jsx",
+    "deploy": "aws s3 sync --region ap-northeast-2 ./dist s3://$S3_BUCKET_NAME",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

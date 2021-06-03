@@ -16,14 +16,16 @@ const NotificationListItem: FC<NotificationListItemProps> = ({
 }) => (
   <ListItem as={Flex} p="0.25rem">
     <Box>
-      <Avatar name="Dan Abrahmov" src={pic} />
+      <Avatar mt="3px" size="sm" name="Dan Abrahmov" src={pic} />
     </Box>
     <Flex flexDir="column" pl="0.5rem">
       <Box>
-        <Text fontSize="sm">{title}</Text>
+        <Text fontSize="xs" fontWeight="bold">
+          {title}
+        </Text>
       </Box>
       <Box>
-        <Text fontSize="sm">{desc}</Text>
+        <Text fontSize="xs">{desc}</Text>
       </Box>
     </Flex>
   </ListItem>
