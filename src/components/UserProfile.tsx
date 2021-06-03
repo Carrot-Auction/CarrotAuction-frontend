@@ -7,15 +7,17 @@ import {
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
+import { myAlarm } from "api";
 import { useCurrentUserState } from "atoms/currentUserState";
 import {
   NotificationIconButton,
+  NotificationItem,
   NotificationList,
   NotificationPopover,
   SimpleUserDisplay,
 } from "components";
 import useLogout from "hooks/useLogout";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { CgLogOut, CgProfile } from "react-icons/cg";
 import { MdSettings } from "react-icons/md";
 import { useHistory, Link as RouterLink } from "react-router-dom";
@@ -24,6 +26,22 @@ export const UserProfile: React.FC = () => {
   const history = useHistory();
   const [user] = useCurrentUserState();
   const logout = useLogout();
+  const [results, setResults] = useState<NotificationItem[]>([]);
+
+  useEffect(() => {
+    (async () => {
+      const { data } = await myAlarm(user.id);
+      setResults(
+        data.map(el => ({
+          title: el.title,
+          desc: el.description,
+          id: el.id,
+          pic: "https://via.placeholder.com/150",
+        }))
+      );
+    })();
+  }, []);
+
   return user === null ? (
     <RouterLink to="/login">
       <Button variant="outline" h="full" colorScheme="orange">
@@ -34,7 +52,7 @@ export const UserProfile: React.FC = () => {
     <HStack spacing={4} mt="-0.25rem">
       <Box>
         <NotificationPopover trigger={<NotificationIconButton unread />}>
-          <NotificationList items={[]} />
+          <NotificationList items={results} />
         </NotificationPopover>
       </Box>
       <Menu>
