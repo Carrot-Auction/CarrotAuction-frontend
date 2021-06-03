@@ -1,6 +1,7 @@
-import { Favorite, ItemBider } from "api";
+import { ItemBider } from "api";
 import { ApiResponse } from "types";
 import { apiRequest } from "utils";
+import { Item } from "./item";
 
 export interface User {
   id: number;
@@ -37,10 +38,11 @@ export const getUser = async (userId: number): Promise<ApiResponse<UserView>> =>
 export const getLoginUser = async (): Promise<ApiResponse<UserView>> =>
   await apiRequest("GET", `/api/user/loginUser`);
 
-export const getUserFavorites = async (
-  userId: number
-): Promise<ApiResponse<Favorite[]>> =>
-  await apiRequest("GET", `/api/user/${userId}/favoriteItem`);
+export const getMyFavorites = async (): Promise<ApiResponse<Item[]>> =>
+  await apiRequest("GET", `/api/user/myFavorite`);
+
+export const getMyItems = async (): Promise<ApiResponse<Item[]>> =>
+  await apiRequest("GET", `/api/user/myItem`);
 
 export const getUserBittenItems = async (
   userId: number

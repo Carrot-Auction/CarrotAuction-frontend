@@ -26,3 +26,6 @@ export const deleteAlarm = async (
 
 export const getAlarm = async (alarmId: number): Promise<ApiResponse<Alarm>> =>
   await apiRequest("GET", `/api/alarm/${alarmId}`);
+
+export const myAlarm = async (userId: number): Promise<ApiResponse<Alarm[]>> =>
+  await apiRequest("GET", `/api/alarm/${userId}/myAlarm`);
