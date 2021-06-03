@@ -18,7 +18,7 @@ import {
 } from "components";
 import useLogout from "hooks/useLogout";
 import React, { useEffect, useState } from "react";
-import { CgLogOut, CgProfile } from "react-icons/cg";
+import { CgLogOut } from "react-icons/cg";
 import { MdSettings } from "react-icons/md";
 import { useHistory, Link as RouterLink } from "react-router-dom";
 
@@ -30,6 +30,7 @@ export const UserProfile: React.FC = () => {
 
   useEffect(() => {
     (async () => {
+      if (user === null) return;
       const { data } = await myAlarm(user.id);
       setResults(
         data.map(el => ({
@@ -40,7 +41,7 @@ export const UserProfile: React.FC = () => {
         }))
       );
     })();
-  }, []);
+  }, [user]);
 
   return user === null ? (
     <RouterLink to="/login">
@@ -60,12 +61,12 @@ export const UserProfile: React.FC = () => {
           <SimpleUserDisplay username={user.nickname} />
         </MenuButton>
         <MenuList>
-          <MenuItem
+          {/* <MenuItem
             icon={<CgProfile />}
             onClick={() => history.push(`/users/${user.id}`)}
           >
             프로필
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem
             icon={<MdSettings />}
             onClick={() => history.push("/mypage")}
