@@ -41,6 +41,9 @@ export const getLoginUser = async (): Promise<ApiResponse<UserView>> =>
 export const getMyFavorites = async (): Promise<ApiResponse<Item[]>> =>
   await apiRequest("GET", `/api/user/myFavorite`);
 
+export const getMyItems = async (): Promise<ApiResponse<Item[]>> =>
+  await apiRequest("GET", `/api/user/myItem`);
+
 export const getUserBittenItems = async (
   userId: number
 ): Promise<ApiResponse<ItemBider[]>> =>

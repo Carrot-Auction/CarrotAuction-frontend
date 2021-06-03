@@ -25,3 +25,6 @@ export const deleteItem = async (itemId: number): Promise<ApiResponse<Item>> =>
 
 export const getItem = async (itemId: number): Promise<ApiResponse<Item>> =>
   await apiRequest("GET", `/api/item/${itemId}`);
+
+export const searchItem = async (title: string): Promise<ApiResponse<Item[]>> =>
+  await apiRequest("GET", `/api/item/search/${title}`);
