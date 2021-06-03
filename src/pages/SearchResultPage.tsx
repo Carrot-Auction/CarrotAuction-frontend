@@ -1,9 +1,9 @@
-import { Heading } from "@chakra-ui/layout";
-import { Box, Divider, Grid } from "@chakra-ui/react";
+import { Heading, Wrap, WrapItem } from "@chakra-ui/layout";
+import { Box, Divider } from "@chakra-ui/react";
 import { searchItem } from "api";
 import { ItemCard, ItemCardProps } from "components";
 import { useQuery } from "hooks/useQuery";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 export const SearchResultPage: React.FC = () => {
   const query = useQuery();
@@ -25,16 +25,16 @@ export const SearchResultPage: React.FC = () => {
     })();
   }, [query]);
   return (
-    <>
-      <Box maxW="1080px" m="auto">
-        <Heading size="md">{`"${query.get("q")}" 검색 결과`}</Heading>
-        <Divider mb={2} mt={2} />
-        <Grid templateColumns="repeat(5, 1fr)" gap={6}>
-          {results.map((item, idx) => (
-            <ItemCard key={idx} id={idx} {...item} />
-          ))}
-        </Grid>
-      </Box>
-    </>
+    <Box p="1rem" maxW="1080px" m="auto">
+      <Heading size="md">{`"${query.get("q")}" 검색 결과`}</Heading>
+      <Divider mb={2} mt={2} />
+      <Wrap spacing={5}>
+        {results.map(item => (
+          <WrapItem key={item.id}>
+            <ItemCard {...item} />
+          </WrapItem>
+        ))}
+      </Wrap>
+    </Box>
   );
 };

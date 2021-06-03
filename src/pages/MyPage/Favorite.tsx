@@ -1,4 +1,4 @@
-import { Divider, Grid, Heading } from "@chakra-ui/react";
+import { Divider, Heading, Wrap, WrapItem } from "@chakra-ui/react";
 import { getMyFavorites } from "api";
 import { ItemCard, ItemCardProps } from "components";
 import React, { FC, useEffect, useState } from "react";
@@ -25,11 +25,13 @@ const Favorite: FC = () => {
     <>
       <Heading size="md">찜목록</Heading>
       <Divider m="0.25rem 0" />
-      <Grid templateColumns="repeat(6, 1fr)" gap={6}>
-        {favorites.map((item, idx) => (
-          <ItemCard key={idx} id={idx} {...item} favorite />
+      <Wrap spacing={6}>
+        {favorites.map(item => (
+          <WrapItem key={item.id}>
+            <ItemCard {...item} favorite />
+          </WrapItem>
         ))}
-      </Grid>
+      </Wrap>
     </>
   );
 };
