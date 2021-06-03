@@ -31,7 +31,9 @@ const SearchInput: FC<SearchInputProps> = ({ onQuery, ...props }) => {
         onClick={() => {
           inputEl.current.value === ""
             ? inputEl.current.focus()
-            : onQuery && onQuery(inputEl.current.value);
+            : inputEl.current.value &&
+              onQuery &&
+              onQuery(inputEl.current.value);
         }}
       />
       <Input
@@ -41,6 +43,12 @@ const SearchInput: FC<SearchInputProps> = ({ onQuery, ...props }) => {
         bgColor="appBG"
         maxW="13rem"
         placeholder="검색어를 입력해주세요."
+        onKeyUp={e =>
+          e.key === "Enter" &&
+          inputEl.current.value &&
+          onQuery &&
+          onQuery(inputEl.current.value)
+        }
         _placeholder={{
           color: "#9B9B9B",
         }}
@@ -56,14 +64,22 @@ const SearchInput: FC<SearchInputProps> = ({ onQuery, ...props }) => {
 
 export type HeaderProps = {
   rightArea?: ReactNode;
+  onSearch?: (query: string) => void;
+  searchValue?: string;
 };
-export const Header: FC<HeaderProps> = ({ rightArea }) => {
+export const Header: FC<HeaderProps> = ({
+  rightArea,
+  onSearch,
+  searchValue,
+}) => {
   return (
     <Flex
       w="full"
       h="4rem"
       bgColor="white"
       p="1rem"
+      gridGap="1em"
+      direction="row"
       justifyContent="space-between"
     >
       <Box>
@@ -72,7 +88,7 @@ export const Header: FC<HeaderProps> = ({ rightArea }) => {
         </RouterLink>
       </Box>
       <Box flexGrow={1} h="full" w="full">
-        <SearchInput />
+        <SearchInput onQuery={onSearch} defaultValue={searchValue} />
       </Box>
       {rightArea && <Box h="full">{rightArea}</Box>}
     </Flex>

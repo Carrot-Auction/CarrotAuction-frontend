@@ -6,3 +6,4 @@ export * from "./NotificationPopover";
 export * from "./NotificationIconButton";
 export * from "./NotificationList";
 export * from "./ItemCard";
+export * from "./UserProfile";

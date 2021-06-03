@@ -1,11 +1,15 @@
 import React, { FC } from "react";
-import { Badge, Box, HStack, Icon, Image, Text } from "@chakra-ui/react";
 import {
-  AiOutlineComment,
-  AiOutlineHeart,
-  AiOutlineStar,
-  AiFillStar,
-} from "react-icons/ai";
+  Badge,
+  Box,
+  HStack,
+  Icon,
+  Image,
+  LinkBox,
+  Text,
+} from "@chakra-ui/react";
+import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 export type ItemCardProps = {
   /**
@@ -25,10 +29,6 @@ export type ItemCardProps = {
    */
   price: number;
   /**
-   * 덧글 수
-   */
-  comments: number;
-  /**
    * 좋아요 수
    */
   likes: number;
@@ -37,17 +37,22 @@ export type ItemCardProps = {
    */
   dday: number;
 
+  id: number;
+
   favorite?: boolean;
   favoriteHandle?: (value: boolean) => void;
 };
 export const ItemCard: FC<ItemCardProps> = props => {
   return (
-    <Box
+    <LinkBox
+      as={Link}
+      to={`/items/${props.id}`}
       maxW="12rem"
       borderRadius="1rem"
       bgColor="white"
       overflow="hidden"
       userSelect="none"
+      border="1px solid #eee"
     >
       <Box w="12rem" h="12rem" position="relative">
         <Image src={props.imgurl} w="100%" h="100%" />
@@ -58,26 +63,27 @@ export const ItemCard: FC<ItemCardProps> = props => {
           top="0.5rem"
           right="0.5rem"
           cursor="pointer"
-          onClick={() =>
-            props.favoriteHandle && props.favoriteHandle(!props.favorite)
-          }
+          onClick={e => {
+            props.favoriteHandle && props.favoriteHandle(!props.favorite);
+            e.preventDefault();
+          }}
         >
           {props.favorite ? (
             <Icon
-              as={AiFillStar}
+              as={AiFillHeart}
               w="1.5rem"
               h="1.5rem"
-              color="yellow.300"
+              color="pink.300"
               filter="drop-shadow(1px 1px 2px gray)"
             />
           ) : (
             <Icon
-              as={AiOutlineStar}
+              as={AiOutlineHeart}
               w="1.5rem"
               h="1.5rem"
               color="gray"
               _hover={{
-                color: "yellow.300",
+                color: "pink.300",
               }}
               filter="drop-shadow(1px 1px 1px gray)"
             />
@@ -111,16 +117,12 @@ export const ItemCard: FC<ItemCardProps> = props => {
           <Text fontWeight="semibold">{`D-${props.dday}`}</Text>
           <HStack justifyContent="flex-end">
             <Box>
-              <Icon as={AiOutlineComment} />
-              {props.comments}
-            </Box>
-            <Box>
               <Icon as={AiOutlineHeart} />
               {props.likes}
             </Box>
           </HStack>
         </HStack>
       </Box>
-    </Box>
+    </LinkBox>
   );
 };

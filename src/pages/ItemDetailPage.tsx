@@ -48,11 +48,11 @@ export const ItemDetailPage: React.FC = () => {
     location: "동작구 상도2동",
   };
   const Card: ItemCardProps = {
+    id: 1,
     title: "상품이름12345678901234567890",
     imgurl: "https://via.placeholder.com/150",
     location: "상도동",
     price: 1000,
-    comments: 12,
     likes: 12,
     dday: 5,
     favorite: false,

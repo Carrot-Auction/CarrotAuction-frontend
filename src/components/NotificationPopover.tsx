@@ -26,7 +26,7 @@ export const NotificationPopover: FC<NotificationPopoverProps> = ({
         <PopoverHeader>알림</PopoverHeader>
         <PopoverArrow />
         <PopoverCloseButton />
-        <PopoverBody maxH="16rem" overflow="scroll">
+        <PopoverBody maxH="16rem" overflowX="hidden" overflowY="scroll">
           {children}
         </PopoverBody>
       </PopoverContent>
