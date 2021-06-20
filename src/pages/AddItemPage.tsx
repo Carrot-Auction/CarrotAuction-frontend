@@ -29,15 +29,8 @@ import { apiRequest } from "utils";
 import { ApiResponse } from "types";
 
 export type ItemRegisterInput = {
-  prictures: string;
-  categori: string;
-  buyYear: string;
-  buyPrice: string;
-  state: string;
+  startPrice: string;
   mainTitle: string;
-  startPrice: number;
-  itemExplain: string;
-  date: VarDate;
 };
 
 //export const UserItemRegister = async (
@@ -110,9 +103,18 @@ export const AddItemPage: FC = () => {
 
   const handleSubmit = e => {
     setSubmitting(true);
-    async (): Promise<ItemRegisterInput> =>
+    async () =>
       (
-        await fetch("http://localhost:8080/api/item", { method: "POST" })
+        await fetch("http://localhost:8080/api/item", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: values.mainTitle,
+            start_price: values.startPrice,
+          }),
+        })
       ).json();
   };
 
