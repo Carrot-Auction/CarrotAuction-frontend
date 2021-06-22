@@ -1,11 +1,10 @@
-import { FC, useRef, useState, useEffect, useCallback } from "react";
+import { FC, useRef, useState, useCallback } from "react";
 import {
   Box,
   Button,
   Divider,
   Flex,
   FormControl,
-  FormErrorMessage,
   FormLabel,
   Heading,
   Input,
@@ -14,19 +13,11 @@ import {
   Image,
   Icon,
   Select,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
   InputGroup,
   InputRightAddon,
   Textarea,
 } from "@chakra-ui/react";
 import { AiOutlinePicture } from "react-icons/ai";
-import { useHistory } from "react-router";
-import { apiRequest } from "utils";
-import { ApiResponse } from "types";
 
 export type ItemRegisterInput = {
   startPrice: string;
@@ -95,7 +86,7 @@ export const AddItemPage: FC = () => {
       ).text();
       urlarray[i] = urlm;
       const reader = new FileReader();
-      reader.onload = e => {
+      reader.onload = () => {
         fileURLs[i] = reader.result;
         setPreviewURL([...fileURLs]);
       };
@@ -104,36 +95,33 @@ export const AddItemPage: FC = () => {
     setValues({ ...values, pictures: urlarray });
   };
 
-  const handleFileButtonClick = e => {
+  const handleFileButtonClick = () => {
     fileRef.current.click();
   };
-  const handleSubmit = useCallback(
-    async e => {
-      (
-        await fetch("http://localhost:8080/api/item", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
+  const handleSubmit = useCallback(async () => {
+    (
+      await fetch("http://localhost:8080/api/item", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: {
+            title: values.mainTitle,
+            buy_year: values.buyYear,
+            buy_price: values.buyPrice,
+            statue: values.state,
+            url: values.pictures,
+            category: values.categori,
+            duration: values.date,
+            start_price: values.startPrice,
+            description: values.itemExplain,
           },
-          body: JSON.stringify({
-            data: {
-              title: values.mainTitle,
-              buy_year: values.buyYear,
-              buy_price: values.buyPrice,
-              statue: values.state,
-              url: values.pictures,
-              category: values.categori,
-              duration: values.date,
-              start_price: values.startPrice,
-              description: values.itemExplain,
-            },
-          }),
-        })
-      ).json();
-      console.log(values);
-    },
-    [values]
-  );
+        }),
+      })
+    ).json();
+    console.log(values);
+  }, [values]);
 
   // const ItemRegister = useItemRegister();
   // const onSubmit = async values => {

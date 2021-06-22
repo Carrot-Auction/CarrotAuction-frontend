@@ -10,18 +10,15 @@ export const ChatListItem: FC<ChatProps> = props => {
   const [changeChat, changeChatSet] = useRecoilState(PickChat);
   const [changeShowChat, changeShowChatSet] = useRecoilState(ShowChat);
   const [chatstate, chatstateSet] = useRecoilState(chatState);
-  const deleteShowList = useCallback(
-    e => {
-      const newProps = [...chatstate];
-      const found = newProps.find(chat => chat.title === props.title);
-      if (found !== undefined) {
-        found.chatListShow = false;
-        chatstateSet(newProps);
-      }
-    },
-    [chatstate]
-  );
-  const changeChatF = e => {
+  const deleteShowList = useCallback(() => {
+    const newProps = [...chatstate];
+    const found = newProps.find(chat => chat.title === props.title);
+    if (found !== undefined) {
+      found.chatListShow = false;
+      chatstateSet(newProps);
+    }
+  }, [chatstate]);
+  const changeChatF = () => {
     changeChatSet(props.title);
     props.title === changeChat
       ? changeShowChat

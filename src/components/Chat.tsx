@@ -41,7 +41,7 @@ export type ChatProps = {
 
 export const Chat: FC<ChatProps> = props => {
   const [showchat, showchatSet] = useRecoilState(ShowChat);
-  const showchatSetF = e => {
+  const showchatSetF = () => {
     showchatSet(false);
   };
   return (

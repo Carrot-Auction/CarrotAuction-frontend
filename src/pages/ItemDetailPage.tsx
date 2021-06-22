@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { ItemDetail, ItemDetailProps } from "components/ItemDetail";
 import { ItemCard, ItemCardProps } from "components/ItemCard";
@@ -50,7 +50,6 @@ export const ItemDetailPage: React.FC = () => {
     ).data;
 
   const [item, setItem] = useState<ItemDetailProps>();
-  const [itemIn, setItemIn] = useState<apiItem>();
 
   useEffect(() => {
     (async () => {

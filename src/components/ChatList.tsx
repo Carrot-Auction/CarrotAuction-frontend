@@ -1,27 +1,18 @@
-import { chatState, countChatState, Show } from "atoms/ChatState";
+import { chatState, Show } from "atoms/ChatState";
 import React, { FC } from "react";
-import { atom, useRecoilValue, useRecoilState } from "recoil";
-import { Chat, ChatProps } from "./Chat";
-import {
-  Box,
-  Icon,
-  Button,
-  IconButton,
-  Tooltip,
-  VStack,
-} from "@chakra-ui/react";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { ChatProps } from "./Chat";
+import { Box, IconButton, Tooltip, VStack } from "@chakra-ui/react";
 import { FaFacebookMessenger } from "react-icons/fa";
 import { ChatListItem } from "./ChatListItem";
 
 export type ChatListProps = { chatlist: ChatProps[] };
 
-export const ChatList: FC<ChatListProps> = props => {
+export const ChatList: FC<ChatListProps> = () => {
   const [showItem, showItemSet] = useRecoilState(Show);
   const showOnclick = () => {
     showItem ? showItemSet(false) : showItemSet(true);
   };
-  const count = useRecoilValue(countChatState);
-  const fake = [{ title: "구본휘" }, { title: "이동곤" }];
   const chatstate = useRecoilValue(chatState);
   return (
     <Box position="fixed" bottom="1rem" right="5rem">

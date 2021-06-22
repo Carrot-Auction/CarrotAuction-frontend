@@ -8,11 +8,11 @@ import { ChatList } from "./components/ChatList";
 import { chatState, ShowChat, PickChat } from "./atoms/ChatState";
 import { useRecoilValue } from "recoil";
 import { Chat } from "./components/Chat";
+
 const App: FC = () => {
   const history = useHistory();
   const location = useLocation();
   const queries = useQuery();
-  const [user, setUser] = useCurrentUserState();
 
   const chatlist = useRecoilValue(chatState);
   const pickchat = useRecoilValue(PickChat);
@@ -22,17 +22,6 @@ const App: FC = () => {
       return true;
     }
   };
-  useEffect(() => {
-    if (user === null)
-      (async () => {
-        try {
-          const userInfo = await getLoginUser();
-          setUser(userInfo.data);
-        } catch (err) {
-          return null;
-        }
-      })();
-  }, []);
   return (
     <>
       <Header
