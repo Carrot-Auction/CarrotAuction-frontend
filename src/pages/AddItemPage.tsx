@@ -90,7 +90,6 @@ export const AddItemPage: FC = () => {
   };
 
   const [values, setValues] = useState(initialValues);
-  const [submitting, setSubmitting] = useState(false);
 
   const handleChange = useCallback(
     e => {
@@ -109,7 +108,17 @@ export const AddItemPage: FC = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ values }),
+          body: JSON.stringify({
+            title: values.mainTitle,
+            buy_year: values.buyYear,
+            buy_price: values.buyYear,
+            statue: values.state,
+            multipartFiles: values.pictures,
+            category: values.categori,
+            duration: values.date,
+            start_price: values.startPrice,
+            description: values.itemExplain,
+          }),
         })
       ).json();
   };
@@ -307,7 +316,6 @@ export const AddItemPage: FC = () => {
               <FormControl id="subMit" w="10rem">
                 <Button onClick={handleSubmit}>제품등록</Button>
               </FormControl>
-              <Box>{item ? item : ""}</Box>
             </Flex>
           </Box>
         </form>
