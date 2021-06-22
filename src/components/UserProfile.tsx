@@ -18,7 +18,7 @@ import {
 } from "components";
 import useLogout from "hooks/useLogout";
 import React, { useEffect, useState } from "react";
-import { CgLogOut, CgProfile } from "react-icons/cg";
+import { CgLogOut } from "react-icons/cg";
 import { MdSettings } from "react-icons/md";
 import { useHistory, Link as RouterLink } from "react-router-dom";
 
