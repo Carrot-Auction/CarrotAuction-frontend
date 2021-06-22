@@ -86,7 +86,7 @@ export const AddItemPage: FC = () => {
     mainTitle: "",
     startPrice: "",
     itemExplain: "",
-    date: "",
+    date: 1,
   };
 
   const [values, setValues] = useState(initialValues);
@@ -293,12 +293,15 @@ export const AddItemPage: FC = () => {
                 </FormControl>
                 <FormControl id="date" w="20rem">
                   <FormLabel>기한</FormLabel>
-                  <Input
-                    type="date"
-                    name="date"
-                    value={values.date}
-                    onChange={handleChange}
-                  />
+                  <InputGroup>
+                    <Input
+                      name="date"
+                      type="number"
+                      value={values.date}
+                      onChange={handleChange}
+                    />
+                    <InputRightAddon>일</InputRightAddon>
+                  </InputGroup>
                 </FormControl>
               </Flex>
             </Box>
