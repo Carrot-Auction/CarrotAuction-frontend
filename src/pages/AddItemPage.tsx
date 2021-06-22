@@ -65,7 +65,7 @@ export const AddItemPage: FC = () => {
   };
 
   const [values, setValues] = useState(initialValues);
-
+  const [urls, setUrls] = useState(null);
   const handleChange = useCallback(
     e => {
       const { name, value } = e.target;
@@ -76,7 +76,7 @@ export const AddItemPage: FC = () => {
 
   const handleFileOnChange = async e => {
     //파일 불러오기
-    const urls = [];
+    const urlarray = [];
     const fileArr = e.target.files;
     const fileURLs = [];
     const filesLength = fileArr.length;
@@ -86,15 +86,16 @@ export const AddItemPage: FC = () => {
       fie = fileArr[i];
       formData.append("file", fileArr[i], fileArr[i].name);
       const url = (
-        await fetch("https://localhost:8080/gallery", {
+        await fetch("http://localhost:8080/gallery", {
           method: "POST",
           headers: {
-            "Content-Type": "multipart/form-data",
+            //"Content-Type": "multipart/form-data",
           },
           body: formData,
         })
       ).text();
-      urls.concat(url);
+      urlarray[i] = url;
+      setUrls(urlarray);
       const reader = new FileReader();
       reader.onload = e => {
         fileURLs[i] = reader.result;
