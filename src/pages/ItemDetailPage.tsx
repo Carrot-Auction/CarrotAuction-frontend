@@ -42,7 +42,7 @@ export const ItemDetailPage: React.FC = () => {
   console.log(id);
 
   const getItem = async () =>
-    (await fetch(`http://localhost:8080/itemDetail/${id}`)).json();
+    (await fetch(`http://localhost:8080/api/item/itemDetail/${id}`)).json();
 
   const [item, setItem] = useState<ItemDetailProps>();
   const [itemIn, setItemIn] = useState<apiItem>();
