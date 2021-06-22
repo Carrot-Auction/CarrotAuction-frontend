@@ -1,8 +1,18 @@
 import React, { FC, useState, useCallback } from "react";
-import { Box, Image, Flex, Button, Icon, Avatar } from "@chakra-ui/react";
+import {
+  Box,
+  Image,
+  Flex,
+  Button,
+  Icon,
+  Avatar,
+  Input,
+} from "@chakra-ui/react";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Chat } from "components/Chat";
-import { useCurrentUserState } from "atoms";
+import { useAlreadyLoggedInState, useCurrentUserState } from "atoms";
+import { ShowDeal } from "atoms/dealState";
+import { useRecoilState } from "recoil";
 
 export type ItemDetailProps = {
   imgurls: string[]; // 등록한 이미지 리스트
@@ -16,14 +26,21 @@ export type ItemDetailProps = {
   content: string; // 내용
   location: string; // 판매자 위치
   user_id: number;
+  item_id: number;
 };
 
 export const ItemDetail: FC<ItemDetailProps> = props => {
   const [userState] = useCurrentUserState();
   const [state, setState] = useState(0);
+  const [showdeal, showdealSet] = useRecoilState(ShowDeal);
   function mod(n: number, m: number) {
     return ((n % m) + m) % m;
   }
+  const showdealOn = e => {
+    showdealSet(true);
+  };
+
+  //const [userLogin] = useAlreadyLoggedInState();
   const defualt =
     "https://ceppp.ca/wp-content/uploads/ceppp-profil-generique-1000x1000px-1.jpg";
   const onIncrease = useCallback(() => {
@@ -104,6 +121,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                     marginTop="0.3rem"
                     w="7.5rem"
                     h="2.5rem"
+                    onClick={showdealOn}
                   >
                     경매참가
                   </Button>
@@ -118,6 +136,13 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                     경매참가불가
                   </Box>
                 )}
+              </Box>
+              <Box position="absolute" left="50%" top="50%">
+                <DealWindow
+                  item_id={props.item_id}
+                  nowprice={props.nowprice}
+                  user_id={props.user_id}
+                />
               </Box>
             </Box>
           </Box>
@@ -150,5 +175,72 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
         </Box>
       </Box>
     </Flex>
+  );
+};
+
+export type dealProps = {
+  nowprice: number;
+  item_id: number;
+  user_id: number;
+};
+
+export type dealPriceProps = {
+  item_id: number;
+  user_id: number;
+  deal_price: number;
+};
+
+export const DealWindow: FC<dealProps> = props => {
+  const [showdeal, showdealSet] = useRecoilState(ShowDeal);
+  const [values, valuesSet] = useState<dealPriceProps>({
+    item_id: props.item_id,
+    user_id: props.user_id,
+    deal_price: 0,
+  });
+  const onChage = useCallback(
+    e => {
+      const { name, value } = e.target;
+      valuesSet({ ...values, [name]: value });
+    },
+    [values]
+  );
+  const deal = async e => {
+    (
+      await fetch("http://localhost:8080/api/itembider", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: {
+            item_id: values.item_id,
+            user_id: values.user_id,
+            deal_price: values.deal_price,
+          },
+        }),
+      })
+    ).json();
+    showdealSet(true);
+  };
+  return (
+    <Box w="30rem" h="20rem">
+      <Input
+        name="deal_price"
+        value={values.deal_price}
+        type="number"
+        w="20rem"
+        h="5rem"
+        onChange={onChage}
+      />
+      {props.nowprice < values.deal_price ? (
+        <Button w="8rem" h="5rem" onclick={deal}>
+          확인
+        </Button>
+      ) : (
+        <Box w="8rem" h="5rem">
+          가격정정
+        </Box>
+      )}
+    </Box>
   );
 };

@@ -3,6 +3,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import { ItemDetail, ItemDetailProps } from "components/ItemDetail";
 import { ItemCard, ItemCardProps } from "components/ItemCard";
 import { useParams } from "react-router";
+import { deadlineItemList, newItemList } from "api";
 /*
 interface ItemProps {
   userId: number;
@@ -74,14 +75,25 @@ export const ItemDetailPage: React.FC = () => {
     })();
   }, []);
   console.log(item);
+
+  const [newItems, setNewItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
+  useEffect(() => {
+    (async () => {
+      const itemsResult = await deadlineItemList();
+      const newItemsResult = await newItemList();
+      setItems(itemsResult.data);
+      setNewItems(newItemsResult.data);
+    })();
+  }, []);
   const Card: ItemCardProps = {
     id: 1,
     title: "상품이름12345678901234567890",
-    imgurl: "https://via.placeholder.com/150",
+    url: "https://via.placeholder.com/150",
     location: "상도동",
     price: 1000,
     likes: 12,
-    dday: 5,
+    duration: "5",
     favorite: false,
   };
   return (
