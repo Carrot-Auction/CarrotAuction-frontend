@@ -18,6 +18,11 @@ export type ItemDetailProps = {
 
 export const ItemDetail: FC<ItemDetailProps> = props => {
   const [state, setState] = useState(0);
+  props.imgurls === null
+    ? (props.imgurls = [
+        "https://ceppp.ca/wp-content/uploads/ceppp-profil-generique-1000x1000px-1.jpg",
+      ])
+    : props.imgurls;
   function mod(n: number, m: number) {
     return ((n % m) + m) % m;
   }
@@ -33,13 +38,9 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
     <Flex h="calx(100vh - 6rem)" justifyContent="center" flexDir="column">
       <Box display="flex" bgColor="white" minW="46.78rem">
         <Box marginTop="13rem">
-          {props.imgurls !== null ? (
-            <Button display="inline-block" onClick={onDecrease} bgColor="white">
-              <Icon as={AiFillCaretLeft} w="1.5rem" h="1.5rem" />
-            </Button>
-          ) : (
-            <Box w="1.5rem" h="1.5rem" bgColor="white"></Box>
-          )}
+          <Button display="inline-block" onClick={onDecrease} bgColor="white">
+            <Icon as={AiFillCaretLeft} w="1.5rem" h="1.5rem" />
+          </Button>
         </Box>
         <Box
           w="full"
@@ -59,7 +60,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
               borderRadius="1rem 1rem 1rem 1rem"
             />
             <Box position="absolute" left="50%" top="55.5%">
-              {props.imgurls !== null ? (state + 1) / props.imgurls.length : 1}
+              {state + 1}/ {props.imgurls.length}
             </Box>
           </Box>
           <Box w="parent">
@@ -132,13 +133,9 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
           </Box>
         </Box>
         <Box marginTop="13rem">
-          {props.imgurls !== null ? (
-            <Button display="inline-block" onClick={onIncrease} bgColor="white">
-              <Icon as={AiFillCaretRight} w="1.5rem" h="1.5rem" />
-            </Button>
-          ) : (
-            <Box w="1.5rem" h="1.5rem" bgColor="white"></Box>
-          )}
+          <Button display="inline-block" onClick={onIncrease} bgColor="white">
+            <Icon as={AiFillCaretRight} w="1.5rem" h="1.5rem" />
+          </Button>
         </Box>
       </Box>
     </Flex>
