@@ -16,7 +16,8 @@ const Favorite: FC = () => {
           price: el.start_price,
           dday: 0,
           imgurl: "https://via.placeholder.com/150",
-          likes: 0,
+          likes: el.likes,
+          favorite: el.favorite,
         }))
       );
     })();
