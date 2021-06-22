@@ -84,7 +84,7 @@ export const AddItemPage: FC = () => {
       const formData = new FormData();
       fie = fileArr[i];
       formData.append("file", fileArr[i], fileArr[i].name);
-      const url = (
+      const urlm = (
         await fetch("http://localhost:8080/gallery", {
           method: "POST",
           headers: {
@@ -93,7 +93,7 @@ export const AddItemPage: FC = () => {
           body: formData,
         })
       ).text();
-      urlarray[i] = url;
+      urlarray[i] = urlm;
       const reader = new FileReader();
       reader.onload = e => {
         fileURLs[i] = reader.result;
