@@ -1,7 +1,8 @@
 export interface ApiResponse<T> {
+  error?: string;
   transaction_time: string;
-  result_code: "ERROR" | "OK";
-  description: string;
+  result_code?: "ERROR" | "OK";
+  description?: string;
   pagination?: Pagination;
   data: T;
 }

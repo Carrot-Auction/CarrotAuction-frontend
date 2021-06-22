@@ -9,6 +9,8 @@ export interface Item {
   start_price: number;
   title: string;
   user_id: number;
+  favorite: boolean;
+  likes: number;
 }
 
 export const getItemList = async (): Promise<ApiResponse<Item[]>> =>

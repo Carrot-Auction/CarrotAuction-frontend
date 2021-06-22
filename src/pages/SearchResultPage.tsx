@@ -17,9 +17,10 @@ export const SearchResultPage: React.FC = () => {
           location: "서울",
           id: el.id,
           price: el.start_price,
+          favorite: el.favorite,
           dday: 0,
           imgurl: "https://via.placeholder.com/150",
-          likes: 0,
+          likes: el.likes,
         }))
       );
     })();
