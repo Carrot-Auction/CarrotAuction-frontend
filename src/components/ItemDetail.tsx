@@ -239,14 +239,14 @@ export const DealWindow: FC<dealProps> = props => {
   return (
     <Box w="20rem" h="10rem">
       <VStack justifyContent="center">
-        <Box w="20rem" bgColor="gray">
-          <Button bgColor="orange" onClick={cancel}>
+        <Box w="20rem" bgColor="orange">
+          <Box color="white">제시 금액</Box>
+          <Button marginLeft="16rem" bgColor="orange" onClick={cancel}>
             X
           </Button>
         </Box>
         <Box>
           <Input
-            marginLeft="3rem"
             name="deal_price"
             value={values.deal_price}
             type="number"
@@ -257,7 +257,6 @@ export const DealWindow: FC<dealProps> = props => {
         </Box>
         {props.nowprice < values.deal_price ? (
           <Button
-            marginLeft="5rem"
             marginTop="3rem"
             bgColor="green"
             w="5rem"
