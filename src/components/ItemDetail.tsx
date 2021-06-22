@@ -45,7 +45,11 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
         >
           <Box w="parent" textAlign="center">
             <Image
-              src={props.imgurls[state]}
+              src={
+                props.imgurls
+                  ? props.imgurls[state]
+                  : "https://ceppp.ca/wp-content/uploads/ceppp-profil-generique-1000x1000px-1.jpg"
+              }
               w="46.78rem"
               h="25rem"
               display="inline-block"
