@@ -25,19 +25,47 @@ export const ItemDetailPage: React.FC = () => {
 };
 */
 
+type apiItem = {
+  nickname: string; // 닉네임
+  category: string; // 상품 종류
+  title: string; // 제목
+  duration: string; // 시간
+  current_price: number; // 현재가격
+  start_price: number; // 시작가격
+  description: string; // 내용
+  location: string;
+  images: string[];
+};
+
 export const ItemDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   console.log(id);
 
-  const getItem = async (): Promise<ItemDetailProps> =>
+  const getItem = async () =>
     (await fetch(`http://localhost:8080/itemDetail/${id}`)).json();
 
   const [item, setItem] = useState<ItemDetailProps>();
+  const [itemIn, setItemIn] = useState<apiItem>();
+
   useEffect(() => {
     (async () => {
-      setItem(await getItem());
+      setItemIn(await getItem());
     })();
   }, []);
+
+  setItem({
+    imgurls: itemIn.images, // 등록한 이미지 리스트
+    profilurl:
+      "https://ceppp.ca/wp-content/uploads/ceppp-profil-generique-1000x1000px-1.jpg",
+    name: itemIn.nickname, // 닉네임
+    filter: itemIn.category, // 상품 종류
+    title: itemIn.title, // 제목
+    time: itemIn.duration, // 시간
+    nowprice: itemIn.current_price, // 현재가격
+    defualtprice: itemIn.start_price, // 시작가격
+    content: itemIn.description, // 내용
+    location: itemIn.location,
+  });
   const Card: ItemCardProps = {
     id: 1,
     title: "상품이름12345678901234567890",

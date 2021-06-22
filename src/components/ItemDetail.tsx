@@ -3,17 +3,13 @@ import { Box, Image, Flex, Button, Icon, Avatar } from "@chakra-ui/react";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Chat } from "components/Chat";
 
-export type imgurl = {
-  imgurl: string; // 각 이미지 url
-};
-
 export type ItemDetailProps = {
-  imgurls: imgurl[]; // 등록한 이미지 리스트
+  imgurls: string[]; // 등록한 이미지 리스트
   profilurl: string; // 프로필 사진 url
   name: string; // 닉네임
   filter: string; // 상품 종류
   title: string; // 제목
-  time: number; // 시간
+  time: string; // 시간
   nowprice: number; // 현재가격
   defualtprice: number; // 시작가격
   content: string; // 내용
@@ -49,7 +45,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
         >
           <Box w="parent" textAlign="center">
             <Image
-              src={props.imgurls[state].imgurl}
+              src={props.imgurls[state]}
               w="46.78rem"
               h="25rem"
               display="inline-block"
