@@ -22,6 +22,8 @@ export default async function apiRequest<D = void, R = void>(
       body,
     })
   ).json();
-  if (res.result_code === "ERROR") throw Error(res.description);
+  if (res.error) throw Error(res.error);
+  if (res.result_code && res.result_code === "ERROR")
+    throw Error(res.description);
   return res;
 }
