@@ -101,26 +101,25 @@ export const AddItemPage: FC = () => {
   );
 
   const handleSubmit = async e => {
-    async () =>
-      (
-        await fetch("http://localhost:8080/api/item", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: values.mainTitle,
-            buy_year: values.buyYear,
-            buy_price: values.buyYear,
-            statue: values.state,
-            multipartFiles: values.pictures,
-            category: values.categori,
-            duration: values.date,
-            start_price: values.startPrice,
-            description: values.itemExplain,
-          }),
-        })
-      ).json();
+    (
+      await fetch("http://localhost:8080/api/item", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: values.mainTitle,
+          buy_year: values.buyYear,
+          buy_price: values.buyYear,
+          statue: values.state,
+          multipartFiles: values.pictures,
+          category: values.categori,
+          duration: values.date,
+          start_price: values.startPrice,
+          description: values.itemExplain,
+        }),
+      })
+    ).json();
   };
 
   // const ItemRegister = useItemRegister();
@@ -141,15 +140,6 @@ export const AddItemPage: FC = () => {
   // alert(err.message);
   // }
   //};
-  const getItem = async () =>
-    (await fetch("https://jsonplaceholder.typicode.com/posts/1")).json();
-  const [item, setItem] = useState();
-  useEffect(() => {
-    (async () => {
-      setItem(await getItem());
-    })();
-  }, []);
-
   return (
     <Flex justifyContent="center" flexDir="column" bgColor="white">
       <Box m="0 auto" w="47rem" p="1rem" marginTop="8rem">
