@@ -142,9 +142,9 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                 <Box
                   filter="drop-shadow(1px 1px 1px gray)"
                   position="absolute"
-                  left="40%"
-                  top="50%"
-                  bgColor="white"
+                  left="20%"
+                  top="55%"
+                  bgColor="orange.300"
                 >
                   <DealWindow
                     item_id={props.item_id}
@@ -233,8 +233,14 @@ export const DealWindow: FC<dealProps> = props => {
     ).json();
     showdealSet(true);
   };
+  const cancel = e => {
+    showdealSet(false);
+  };
   return (
-    <Box w="30rem" h="10rem">
+    <Box w="20rem" h="10rem">
+      <Button right="0" w="1.5" h="1.5" onClick={cancel}>
+        X
+      </Button>
       <VStack justifyContent="center">
         <Box>
           <Input
@@ -250,9 +256,9 @@ export const DealWindow: FC<dealProps> = props => {
         </Box>
         {props.nowprice < values.deal_price ? (
           <Button
-            marginLeft="3rem"
+            marginLeft="5rem"
             marginTop="3rem"
-            bgColor="blue.300"
+            bgColor="green.300"
             w="5rem"
             h="3rem"
             onClick={deal}
@@ -260,9 +266,7 @@ export const DealWindow: FC<dealProps> = props => {
             확인
           </Button>
         ) : (
-          <Box bgColor="red.300" w="5rem" h="3rem">
-            가격정정
-          </Box>
+          <Box bgColor="red.300">가격이 너무 낮습니다.</Box>
         )}
       </VStack>
     </Box>
