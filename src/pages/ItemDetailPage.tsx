@@ -24,8 +24,6 @@ export const ItemDetailPage: React.FC = () => {
   return <Box>{item ? item.title : ""}</Box>;
 };
 */
-const getItem = async (): Promise<ItemDetailProps> =>
-  (await fetch(`http://localhost:8080/itemDetail/${id}`)).json();
 
 export const ItemDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
