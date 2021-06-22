@@ -1,18 +1,15 @@
 import React, { FC, useState, useCallback } from "react";
 import { Box, Image, Flex, Button, Icon, Avatar } from "@chakra-ui/react";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
-
-export type imgurl = {
-  imgurl: string; // 각 이미지 url
-};
+import { Chat } from "components/Chat";
 
 export type ItemDetailProps = {
-  imgurls: imgurl[]; // 등록한 이미지 리스트
+  imgurls: string[]; // 등록한 이미지 리스트
   profilurl: string; // 프로필 사진 url
   name: string; // 닉네임
   filter: string; // 상품 종류
   title: string; // 제목
-  time: number; // 시간
+  time: string; // 시간
   nowprice: number; // 현재가격
   defualtprice: number; // 시작가격
   content: string; // 내용
@@ -24,6 +21,8 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
   function mod(n: number, m: number) {
     return ((n % m) + m) % m;
   }
+  const defualt =
+    "https://ceppp.ca/wp-content/uploads/ceppp-profil-generique-1000x1000px-1.jpg";
   const onIncrease = useCallback(() => {
     setState(mod(state + 1, props.imgurls.length));
   }, [props.imgurls, state]);
@@ -48,7 +47,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
         >
           <Box w="parent" textAlign="center">
             <Image
-              src={props.imgurls[state].imgurl}
+              src={props.imgurls !== null ? props.imgurls[state] : defualt}
               w="46.78rem"
               h="25rem"
               display="inline-block"
@@ -56,7 +55,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
               borderRadius="1rem 1rem 1rem 1rem"
             />
             <Box position="absolute" left="50%" top="55.5%">
-              {state + 1}/{props.imgurls.length}
+              {state + 1}/ {props.imgurls.length}
             </Box>
           </Box>
           <Box w="parent">
@@ -77,10 +76,12 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                       fontSize="0.8rem"
                       marginTop="0.1rem"
                       filter="drop-shadow(1px 1px 1px gray)"
+                      onClick={() => Chat}
                     >
                       1:1채팅
                     </Button>
                   </Box>
+                  <Box>남은시간: {props.time}</Box>
                 </Box>
                 <Box marginLeft="0.4rem" marginTop="0.1rem">
                   <Box fontWeight="500" fontSize="1.1rem">

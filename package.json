@@ -64,6 +64,7 @@
     "framer-motion": "^4.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-draggable": "^4.4.3",
     "react-icons": "^4.2.0",
     "react-router-dom": "^5.2.0",
     "recoil": "^0.1.2"

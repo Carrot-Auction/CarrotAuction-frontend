@@ -1,7 +1,8 @@
-import React from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { ItemDetail, ItemDetailProps } from "components/ItemDetail";
 import { ItemCard, ItemCardProps } from "components/ItemCard";
+import { useParams } from "react-router";
 /*
 interface ItemProps {
   userId: number;
@@ -24,29 +25,52 @@ export const ItemDetailPage: React.FC = () => {
 };
 */
 
+type apiItem = {
+  nickname: string; // 닉네임
+  category: string; // 상품 종류
+  title: string; // 제목
+  duration: string; // 시간
+  current_price: number; // 현재가격
+  start_price: number; // 시작가격
+  description: string; // 내용
+  location: string;
+  images: string[];
+};
+
 export const ItemDetailPage: React.FC = () => {
-  const Item: ItemDetailProps = {
-    imgurls: [
-      {
-        imgurl:
-          "http://www.jspeople.co.kr/data/file/jsmarket/3667210319_f7kLICDB_3faa45d62e3edb7038322ab991459e73947f34f8.jpg",
-      },
-      {
-        imgurl:
-          "http://fpost.co.kr/board/data/editor/1904/093e906c02611697bbc2a72e9080280c_1555372334_9463.jpg",
-      },
-    ],
-    profilurl:
-      "http://gangnamstar.co.kr/files/attach/images/119/904/027/99b6e593de5df80fd08141a0db2c2166.jpg",
-    name: "구본휘",
-    filter: "의류/신발",
-    title: "조던 신상 팝니다.",
-    time: 6,
-    nowprice: 30000,
-    defualtprice: 25000,
-    content: "진짜 5번 이하 신었습니다. 저희 애들 꼭 데려가 주세요.",
-    location: "동작구 상도2동",
-  };
+  const { id } = useParams<{ id: string }>();
+  console.log(id);
+
+  const getItem = async (): Promise<apiItem> =>
+    (
+      await (
+        await fetch(`http://localhost:8080/api/item/itemDetail/${id}`)
+      ).json()
+    ).data;
+
+  const [item, setItem] = useState<ItemDetailProps>();
+  const [itemIn, setItemIn] = useState<apiItem>();
+
+  useEffect(() => {
+    (async () => {
+      const itemIn = await getItem();
+
+      setItem({
+        imgurls: itemIn.images, // 등록한 이미지 리스트
+        profilurl:
+          "https://ceppp.ca/wp-content/uploads/ceppp-profil-generique-1000x1000px-1.jpg",
+        name: itemIn.nickname, // 닉네임
+        filter: itemIn.category, // 상품 종류
+        title: itemIn.title, // 제목
+        time: itemIn.duration, // 시간
+        nowprice: itemIn.current_price, // 현재가격
+        defualtprice: itemIn.start_price, // 시작가격
+        content: itemIn.description, // 내용
+        location: itemIn.location,
+      });
+    })();
+  }, []);
+  console.log(item);
   const Card: ItemCardProps = {
     id: 1,
     title: "상품이름12345678901234567890",
@@ -60,7 +84,6 @@ export const ItemDetailPage: React.FC = () => {
   return (
     <Flex justifyContent="center" bgColor="white">
       <Box bgColor="white" marginTop="2rem" w="46.78rem">
-        <ItemDetail {...Item}></ItemDetail>
         <Box marginLeft="4.5rem" w="37.78rem">
           <Box
             w="37.78rem"
@@ -71,6 +94,9 @@ export const ItemDetailPage: React.FC = () => {
             borderWidth="0.1rem"
             marginTop="1.5em"
           ></Box>
+          <Box bgColor="gray">
+            {item ? <ItemDetail {...item}></ItemDetail> : <Box>로딩중...</Box>}
+          </Box>
           <Box fontWeight="600" fontSize="1rem" marginTop="2rem">
             이 상품과 함께 봤어요
           </Box>
