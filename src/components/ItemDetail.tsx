@@ -239,9 +239,11 @@ export const DealWindow: FC<dealProps> = props => {
   return (
     <Box w="20rem" h="10rem">
       <VStack justifyContent="center">
-        <Box w="20rem" bgColor="orange">
-          <Box color="white">제시 금액</Box>
-          <Button marginLeft="16rem" bgColor="orange" onClick={cancel}>
+        <Box display="flex" w="20rem" bgColor="green">
+          <Box marginLeft="5rem" fontSize="3rem" color="white">
+            제시 금액
+          </Box>
+          <Button marginLeft="13rem" bgColor="orange" onClick={cancel}>
             X
           </Button>
         </Box>
@@ -259,8 +261,8 @@ export const DealWindow: FC<dealProps> = props => {
           <Button
             marginTop="3rem"
             bgColor="green"
-            w="5rem"
-            h="3rem"
+            w="4rem"
+            h="2rem"
             onClick={deal}
           >
             확인
