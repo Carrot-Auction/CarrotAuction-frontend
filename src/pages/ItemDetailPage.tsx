@@ -66,6 +66,7 @@ export const ItemDetailPage: React.FC = () => {
       });
     })();
   }, []);
+  console.log(item);
   const Card: ItemCardProps = {
     id: 1,
     title: "상품이름12345678901234567890",
@@ -79,7 +80,6 @@ export const ItemDetailPage: React.FC = () => {
   return (
     <Flex justifyContent="center" bgColor="white">
       <Box bgColor="white" marginTop="2rem" w="46.78rem">
-        {item ? <ItemDetail {...item}></ItemDetail> : <Box></Box>}
         <Box marginLeft="4.5rem" w="37.78rem">
           <Box
             w="37.78rem"
