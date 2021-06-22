@@ -11,6 +11,7 @@ import {
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { toggleFavorite } from "api";
+import noimage from "../assets/noimage.jpg";
 
 const FavoriteButton: React.FC<{ favorite: boolean }> = ({ favorite }) => {
   return (
@@ -47,7 +48,7 @@ export type ItemCardProps = {
   /**
    * 상품 이미지
    */
-  imgurl: string;
+  url?: string;
   /**
    * 거래지역
    */
@@ -97,7 +98,7 @@ export const ItemCard: FC<ItemCardProps> = props => {
       border="1px solid #eee"
     >
       <Box w="12rem" h="12rem" position="relative">
-        <Image src={props.imgurl} w="100%" h="100%" />
+        <Image src={props.url ?? noimage} w="100%" h="100%" />
         <Box
           position="absolute"
           w="1.5rem"

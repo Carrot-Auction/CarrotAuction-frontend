@@ -69,7 +69,7 @@ const OrderTable: FC<{ items: Item[] }> = ({ items }) => {
         {items.map(item => (
           <Tr key={item.id}>
             <Td>{item.title}</Td>
-            <Td>경매종료</Td>
+            <Td>판매중</Td>
             <Td isNumeric>{item.start_price}</Td>
             <Td>{item.duration}</Td>
             <Td>{item.user_id}</Td>

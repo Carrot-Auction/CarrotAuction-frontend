@@ -50,7 +50,7 @@ export const ItemDetailPage: React.FC = () => {
   const Card: ItemCardProps = {
     id: 1,
     title: "상품이름12345678901234567890",
-    imgurl: "https://via.placeholder.com/150",
+    url: "https://via.placeholder.com/150",
     location: "상도동",
     price: 1000,
     likes: 12,

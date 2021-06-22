@@ -1,4 +1,5 @@
-import { UserView } from "api";
+import { getLoginUser, UserView } from "api";
+import { useEffect } from "react";
 import {
   atom,
   selector,
@@ -16,7 +17,19 @@ export function useCurrentUserState(): [
   UserView | null,
   SetterOrUpdater<UserView | null>
 ] {
-  return useRecoilState(currentUserState);
+  const [user, setUser] = useRecoilState(currentUserState);
+  useEffect(() => {
+    if (user === null)
+      (async () => {
+        try {
+          const userInfo = await getLoginUser();
+          setUser(userInfo.data);
+        } catch (err) {
+          return null;
+        }
+      })();
+  }, []);
+  return [user, setUser];
 }
 
 export const alreadyLoggedInState = selector({

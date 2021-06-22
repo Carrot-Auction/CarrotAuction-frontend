@@ -14,7 +14,7 @@ const Template: Story<ItemCardProps> = args => <ItemCard {...args} />;
 export const Default: Story<ItemCardProps> = Template.bind({});
 Default.args = {
   title: "상품이름12345678901234567890",
-  imgurl: "https://via.placeholder.com/150",
+  url: "https://via.placeholder.com/150",
   location: "상도동",
   price: 1000,
   likes: 12,

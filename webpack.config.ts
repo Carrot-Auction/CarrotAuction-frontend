@@ -41,7 +41,7 @@ const config: webpack.Configuration = {
         },
       },
       {
-        test: /\.(png|ico|ttf|woff2?|eot|otf|svg)$/,
+        test: /\.(jpg|png|ico|ttf|woff2?|eot|otf|svg)$/,
         loader: "file-loader",
       },
     ],
