@@ -225,7 +225,7 @@ export const DealWindow: FC<dealProps> = props => {
         body: JSON.stringify({
           data: {
             item_id: values.item_id,
-            user_id: values.user_id,
+            seller: values.user_id,
             deal_price: values.deal_price,
           },
         }),
@@ -239,8 +239,8 @@ export const DealWindow: FC<dealProps> = props => {
   return (
     <Box w="20rem" h="10rem">
       <VStack justifyContent="center">
-        <Box w="20rem">
-          <Button right="0" bgColor="orange" onClick={cancel}>
+        <Box w="20rem" bgColor="gray">
+          <Button bgColor="orange" onClick={cancel}>
             X
           </Button>
         </Box>
