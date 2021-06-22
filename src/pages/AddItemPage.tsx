@@ -74,27 +74,26 @@ export const AddItemPage: FC = () => {
     [values]
   );
 
-  const handleFileOnChange = e => {
+  const handleFileOnChange = async e => {
     //파일 불러오기
     const urls = [];
-    const formData = new FormData();
     const fileArr = e.target.files;
     const fileURLs = [];
     const filesLength = fileArr.length;
     let fie;
     for (let i = 0; i < filesLength; i++) {
+      const formData = new FormData();
       fie = fileArr[i];
       formData.append("file", fileArr[i], fileArr[i].name);
-      const url = async () =>
-        (
-          await fetch("https://localhost:8080/galley", {
-            method: "POST",
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-            body: formData,
-          })
-        ).json();
+      const url = (
+        await fetch("https://localhost:8080/gallery", {
+          method: "POST",
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          body: formData,
+        })
+      ).text();
       urls.concat(url);
       const reader = new FileReader();
       reader.onload = e => {
