@@ -1,26 +1,15 @@
-import { getLoginUser, UserView } from "api";
+import { UserView } from "api";
 import {
   atom,
-  Loadable,
   selector,
   SetterOrUpdater,
   useRecoilState,
-  useRecoilValueLoadable,
+  useRecoilValue,
 } from "recoil";
 
 export const currentUserState = atom<UserView | null>({
   key: "CurrentUserState",
-  default: selector({
-    key: "CurrentUserState/Default",
-    get: async () => {
-      try {
-        const userInfo = await getLoginUser();
-        return userInfo.data;
-      } catch (err) {
-        return null;
-      }
-    },
-  }),
+  default: null,
 });
 
 export function useCurrentUserState(): [
@@ -35,6 +24,6 @@ export const alreadyLoggedInState = selector({
   get: ({ get }) => get(currentUserState) !== null,
 });
 
-export function useAlreadyLoggedInState(): Loadable<boolean> {
-  return useRecoilValueLoadable(alreadyLoggedInState);
+export function useAlreadyLoggedInState(): boolean {
+  return useRecoilValue(alreadyLoggedInState);
 }

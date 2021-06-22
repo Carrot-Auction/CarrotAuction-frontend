@@ -14,21 +14,12 @@ import History from "./History";
 import Favorite from "./Favorite";
 
 export const MyPage: React.FC = () => {
-  const loggedInLoadable = useAlreadyLoggedInState();
+  const isLoggedIn = useAlreadyLoggedInState();
   const history = useHistory();
-  switch (loggedInLoadable.state) {
-    case "loading": {
-      return null;
-    }
-    case "hasError":
-    case "hasValue": {
-      const isLoggedIn = loggedInLoadable.contents;
-      if (!isLoggedIn) {
-        history.push("/login");
-        return null;
-      } else return <MyPageContent />;
-    }
-  }
+  if (!isLoggedIn) {
+    history.push("/login");
+    return null;
+  } else return <MyPageContent />;
 };
 
 const MyPageContent: React.FC = () => {

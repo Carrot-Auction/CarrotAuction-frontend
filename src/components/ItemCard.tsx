@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useCallback, useState } from "react";
 import {
   Badge,
   Box,
@@ -10,6 +10,34 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import { toggleFavorite } from "api";
+
+const FavoriteButton: React.FC<{ favorite: boolean }> = ({ favorite }) => {
+  return (
+    <>
+      {favorite ? (
+        <Icon
+          as={AiFillHeart}
+          w="1.5rem"
+          h="1.5rem"
+          color="pink.300"
+          filter="drop-shadow(1px 1px 2px gray)"
+        />
+      ) : (
+        <Icon
+          as={AiOutlineHeart}
+          w="1.5rem"
+          h="1.5rem"
+          color="gray"
+          _hover={{
+            color: "pink.300",
+          }}
+          filter="drop-shadow(1px 1px 1px gray)"
+        />
+      )}
+    </>
+  );
+};
 
 export type ItemCardProps = {
   /**
@@ -40,9 +68,23 @@ export type ItemCardProps = {
   id: number;
 
   favorite?: boolean;
-  favoriteHandle?: (value: boolean) => void;
 };
 export const ItemCard: FC<ItemCardProps> = props => {
+  const [favorite, setFavorite] = useState(props.favorite);
+  const favoriteToggleClick = useCallback(
+    e => {
+      (async () => {
+        try {
+          await toggleFavorite(props.id);
+        } catch (err) {
+          console.error(err);
+        }
+      })();
+      setFavorite(!favorite);
+      e.preventDefault();
+    },
+    [favorite, props.id]
+  );
   return (
     <LinkBox
       as={Link}
@@ -63,31 +105,9 @@ export const ItemCard: FC<ItemCardProps> = props => {
           top="0.5rem"
           right="0.5rem"
           cursor="pointer"
-          onClick={e => {
-            props.favoriteHandle && props.favoriteHandle(!props.favorite);
-            e.preventDefault();
-          }}
+          onClick={favoriteToggleClick}
         >
-          {props.favorite ? (
-            <Icon
-              as={AiFillHeart}
-              w="1.5rem"
-              h="1.5rem"
-              color="pink.300"
-              filter="drop-shadow(1px 1px 2px gray)"
-            />
-          ) : (
-            <Icon
-              as={AiOutlineHeart}
-              w="1.5rem"
-              h="1.5rem"
-              color="gray"
-              _hover={{
-                color: "pink.300",
-              }}
-              filter="drop-shadow(1px 1px 1px gray)"
-            />
-          )}
+          <FavoriteButton favorite={favorite} />
         </Box>
       </Box>
       <Box p="0.5rem" h="6.25rem">
