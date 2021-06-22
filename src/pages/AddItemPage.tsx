@@ -18,6 +18,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { AiOutlinePicture } from "react-icons/ai";
+import { useHistory } from "react-router-dom";
 
 export type ItemRegisterInput = {
   startPrice: string;
@@ -42,6 +43,7 @@ export type ItemRegisterInput = {
 export const AddItemPage: FC = () => {
   const [previewURL, setPreviewURL] = useState(null);
   const fileRef = useRef(null);
+  const history = useHistory();
 
   const initialValues = {
     pictures: null,
@@ -124,6 +126,7 @@ export const AddItemPage: FC = () => {
       })
     ).json();
     console.log(values);
+    history.push("/");
   }, [values]);
 
   // const ItemRegister = useItemRegister();
