@@ -90,9 +90,7 @@ export const ItemDetailPage: React.FC = () => {
             borderBottom="0"
             borderWidth="0.1rem"
             marginTop="1.5em"
-          >
-            <ItemDetail {...item} />
-          </Box>
+          ></Box>
           <Box fontWeight="600" fontSize="1rem" marginTop="2rem">
             이 상품과 함께 봤어요
           </Box>
