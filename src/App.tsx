@@ -1,9 +1,7 @@
 import { Box } from "@chakra-ui/layout";
-import { getLoginUser } from "api";
-import { useCurrentUserState } from "atoms";
 import { Header, UserProfile } from "components";
 import { useQuery } from "hooks/useQuery";
-import React, { FC, Suspense, useEffect } from "react";
+import React, { FC, Suspense } from "react";
 import { Route, useHistory, useLocation } from "react-router-dom";
 import { routes } from "routes";
 import { ChatList } from "./components/ChatList";

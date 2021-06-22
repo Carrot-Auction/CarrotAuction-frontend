@@ -5,7 +5,7 @@ export interface Item {
   category_id: number;
   description: string;
   id: number;
-  item_image_id: number;
+  url: string;
   start_price: number;
   title: string;
   user_id: number;
