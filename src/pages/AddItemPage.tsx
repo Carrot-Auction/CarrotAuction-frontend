@@ -108,15 +108,17 @@ export const AddItemPage: FC = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: values.mainTitle,
-          buy_year: values.buyYear,
-          buy_price: values.buyYear,
-          statue: values.state,
-          multipartFiles: values.pictures,
-          category: values.categori,
-          duration: values.date,
-          start_price: values.startPrice,
-          description: values.itemExplain,
+          data: {
+            title: values.mainTitle,
+            buy_year: values.buyYear,
+            buy_price: values.buyYear,
+            statue: values.state,
+            multipartFiles: values.pictures,
+            category: values.categori,
+            duration: values.date,
+            start_price: values.startPrice,
+            description: values.itemExplain,
+          },
         }),
       })
     ).json();
