@@ -101,8 +101,7 @@ export const AddItemPage: FC = () => {
     [values]
   );
 
-  const handleSubmit = e => {
-    setSubmitting(true);
+  const handleSubmit = async e => {
     async () =>
       (
         await fetch("http://localhost:8080/api/item", {
@@ -110,10 +109,7 @@ export const AddItemPage: FC = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            title: values.mainTitle,
-            start_price: values.startPrice,
-          }),
+          body: JSON.stringify({ values }),
         })
       ).json();
   };
@@ -136,6 +132,14 @@ export const AddItemPage: FC = () => {
   // alert(err.message);
   // }
   //};
+  const getItem = async () =>
+    (await fetch("https://jsonplaceholder.typicode.com/posts/1")).json();
+  const [item, setItem] = useState();
+  useEffect(() => {
+    (async () => {
+      setItem(await getItem());
+    })();
+  }, []);
 
   return (
     <Flex justifyContent="center" flexDir="column" bgColor="white">
@@ -301,8 +305,9 @@ export const AddItemPage: FC = () => {
           <Box marginTop="3rem" marginBottom="5rem">
             <Flex justifyContent="center">
               <FormControl id="subMit" w="10rem">
-                <Input type="submit" value="제품등록" bgColor="gray.300" />
+                <Button onClick={handleSubmit}>제품등록</Button>
               </FormControl>
+              <Box>{item ? item : ""}</Box>
             </Flex>
           </Box>
         </form>
