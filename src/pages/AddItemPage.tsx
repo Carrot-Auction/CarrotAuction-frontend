@@ -84,7 +84,7 @@ export const AddItemPage: FC = () => {
           body: formData,
         })
       ).text();
-      urlarray[i] = urlm;
+      urlarray[i] = await urlm;
       const reader = new FileReader();
       reader.onload = () => {
         fileURLs[i] = reader.result;
@@ -94,8 +94,7 @@ export const AddItemPage: FC = () => {
     }
     setValues({
       ...values,
-      pictures:
-        "https://carrot-img.s3.ap-northeast-2.amazonaws.com/KakaoTalk_Photo_2021-06-22-17-35-03.jpeg",
+      pictures: urlarray,
     });
   };
 
