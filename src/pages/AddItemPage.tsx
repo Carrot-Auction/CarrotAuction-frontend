@@ -52,31 +52,6 @@ export const AddItemPage: FC = () => {
   const [previewURL, setPreviewURL] = useState(null);
   const fileRef = useRef(null);
 
-  const handleFileOnChange = e => {
-    //파일 불러오기
-    const fileArr = e.target.files;
-    const fileURLs = [];
-    const filesLength = fileArr.length;
-    let fie;
-    for (let i = 0; i < filesLength; i++) {
-      fie = fileArr[i];
-      const reader = new FileReader();
-      reader.onload = e => {
-        fileURLs[i] = reader.result;
-        setPreviewURL([...fileURLs]);
-        console.log(previewURL);
-      };
-      reader.readAsDataURL(fie);
-    }
-    const value = previewURL;
-    const name = e.target.name;
-    setValues({ ...values, [name]: value });
-  };
-
-  const handleFileButtonClick = e => {
-    fileRef.current.click();
-  };
-
   const initialValues = {
     pictures: null,
     categori: "",
@@ -95,34 +70,59 @@ export const AddItemPage: FC = () => {
     e => {
       const { name, value } = e.target;
       setValues({ ...values, [name]: value });
-      console.log(values);
     },
     [values]
   );
 
-  const handleSubmit = async e => {
-    (
-      await fetch("http://localhost:8080/api/item", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          data: {
-            title: values.mainTitle,
-            buy_year: values.buyYear,
-            buy_price: values.buyYear,
-            statue: values.state,
-            multipartFiles: values.pictures,
-            category: values.categori,
-            duration: values.date,
-            start_price: values.startPrice,
-            description: values.itemExplain,
-          },
-        }),
-      })
-    ).json();
+  const handleFileOnChange = e => {
+    //파일 불러오기
+    const fileArr = e.target.files;
+    const fileURLs = [];
+    const filesLength = fileArr.length;
+    let fie;
+    for (let i = 0; i < filesLength; i++) {
+      fie = fileArr[i];
+      const reader = new FileReader();
+      reader.onload = e => {
+        fileURLs[i] = reader.result;
+        setPreviewURL([...fileURLs]);
+      };
+      reader.readAsDataURL(fie);
+    }
+    setValues({ ...values, pictures: fileURLs });
   };
+
+  const handleFileButtonClick = e => {
+    fileRef.current.click();
+  };
+
+  const handleSubmit = useCallback(
+    async e => {
+      (
+        await fetch("http://localhost:8080/api/item", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            data: {
+              title: values.mainTitle,
+              buy_year: values.buyYear,
+              buy_price: values.buyPrice,
+              statue: values.state,
+              multipartFiles: values.pictures,
+              category: values.categori,
+              duration: values.date,
+              start_price: values.startPrice,
+              description: values.itemExplain,
+            },
+          }),
+        })
+      ).json();
+      console.log(values);
+    },
+    [values]
+  );
 
   // const ItemRegister = useItemRegister();
   // const onSubmit = async values => {
