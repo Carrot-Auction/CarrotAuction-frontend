@@ -94,7 +94,7 @@ export const ItemDetailPage: React.FC = () => {
             borderWidth="0.1rem"
             marginTop="1.5em"
           ></Box>
-          <Box>
+          <Box bgColor="gray">
             {item ? <ItemDetail {...item}></ItemDetail> : <Box>로딩중...</Box>}
           </Box>
           <Box fontWeight="600" fontSize="1rem" marginTop="2rem">
