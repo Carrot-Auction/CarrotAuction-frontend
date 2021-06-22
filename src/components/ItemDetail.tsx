@@ -81,6 +81,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                       1:1채팅
                     </Button>
                   </Box>
+                  <Box>남은시간: {props.time}</Box>
                 </Box>
                 <Box marginLeft="0.4rem" marginTop="0.1rem">
                   <Box fontWeight="500" fontSize="1.1rem">
