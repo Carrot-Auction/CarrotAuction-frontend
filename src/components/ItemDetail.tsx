@@ -18,11 +18,11 @@ export type ItemDetailProps = {
 
 export const ItemDetail: FC<ItemDetailProps> = props => {
   const [state, setState] = useState(0);
-  props.imgurls === null
-    ? (props.imgurls = [
-        "https://ceppp.ca/wp-content/uploads/ceppp-profil-generique-1000x1000px-1.jpg",
-      ])
-    : props.imgurls;
+  if (props.imgurls === null) {
+    props.imgurls = [
+      "https://ceppp.ca/wp-content/uploads/ceppp-profil-generique-1000x1000px-1.jpg",
+    ];
+  }
   function mod(n: number, m: number) {
     return ((n % m) + m) % m;
   }
