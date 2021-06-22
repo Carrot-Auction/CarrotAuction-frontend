@@ -95,8 +95,8 @@ export const ItemDetailPage: React.FC = () => {
             marginTop="1.5em"
           ></Box>
           <Box>
-          {item ? <ItemDetail {...item}></ItemDetail> : <Box>로딩중...</Box>}
-          <Box>
+            {item ? <ItemDetail {...item}></ItemDetail> : <Box>로딩중...</Box>}
+          </Box>
           <Box fontWeight="600" fontSize="1rem" marginTop="2rem">
             이 상품과 함께 봤어요
           </Box>
