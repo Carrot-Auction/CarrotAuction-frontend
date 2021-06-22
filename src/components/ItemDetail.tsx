@@ -217,7 +217,7 @@ export const DealWindow: FC<dealProps> = props => {
   );
   const deal = async e => {
     (
-      await fetch("http://localhost:8080/api/itembider", {
+      await fetch("http://localhost:8080/api/itemBider", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -238,14 +238,15 @@ export const DealWindow: FC<dealProps> = props => {
   };
   return (
     <Box w="20rem" h="10rem">
-      <Button right="0" w="1.5" h="1.5" onClick={cancel}>
-        X
-      </Button>
       <VStack justifyContent="center">
+        <Box w="20rem">
+          <Button right="0" bgColor="orange" onClick={cancel}>
+            X
+          </Button>
+        </Box>
         <Box>
           <Input
             marginLeft="3rem"
-            marginTop="3rem"
             name="deal_price"
             value={values.deal_price}
             type="number"
@@ -258,7 +259,7 @@ export const DealWindow: FC<dealProps> = props => {
           <Button
             marginLeft="5rem"
             marginTop="3rem"
-            bgColor="green.300"
+            bgColor="green"
             w="5rem"
             h="3rem"
             onClick={deal}
@@ -266,7 +267,7 @@ export const DealWindow: FC<dealProps> = props => {
             확인
           </Button>
         ) : (
-          <Box bgColor="red.300">가격이 너무 낮습니다.</Box>
+          <Box bgColor="red">가격이 너무 낮습니다.</Box>
         )}
       </VStack>
     </Box>
