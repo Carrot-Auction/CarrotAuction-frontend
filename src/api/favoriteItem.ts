@@ -29,3 +29,8 @@ export const getFavorite = async (
   favoriteId: number
 ): Promise<ApiResponse<Favorite>> =>
   await apiRequest("GET", `/api/favoriteItem/${favoriteId}`);
+
+export const toggleFavorite = async (
+  itemId: number
+): Promise<ApiResponse<Favorite>> =>
+  await apiRequest("GET", `/api/favoriteItem/toggle/${itemId}`);
