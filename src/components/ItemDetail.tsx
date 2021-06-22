@@ -7,6 +7,7 @@ import {
   Icon,
   Avatar,
   Input,
+  VStack,
 } from "@chakra-ui/react";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Chat } from "components/Chat";
@@ -138,7 +139,13 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                 )}
               </Box>
               {showdeal ? (
-                <Box position="absolute" left="40%" top="50%" bgColor="gray">
+                <Box
+                  filter="drop-shadow(1px 1px 1px gray)"
+                  position="absolute"
+                  left="40%"
+                  top="50%"
+                  bgColor="white"
+                >
                   <DealWindow
                     item_id={props.item_id}
                     nowprice={props.nowprice}
@@ -227,24 +234,37 @@ export const DealWindow: FC<dealProps> = props => {
     showdealSet(true);
   };
   return (
-    <Box w="30rem" h="30rem">
-      <Input
-        name="deal_price"
-        value={values.deal_price}
-        type="number"
-        w="20rem"
-        h="5rem"
-        onChange={onChage}
-      />
-      {props.nowprice < values.deal_price ? (
-        <Button bgColor="blue" w="8rem" h="5rem" onclick={deal}>
-          확인
-        </Button>
-      ) : (
-        <Box bgColor="red" w="8rem" h="5rem">
-          가격정정
+    <Box w="30rem" h="10rem">
+      <VStack justifyContent="center">
+        <Box>
+          <Input
+            marginLeft="3rem"
+            marginTop="3rem"
+            name="deal_price"
+            value={values.deal_price}
+            type="number"
+            w="10rem"
+            h="3rem"
+            onChange={onChage}
+          />
         </Box>
-      )}
+        {props.nowprice < values.deal_price ? (
+          <Button
+            marginLeft="3rem"
+            marginTop="3rem"
+            bgColor="blue.300"
+            w="5rem"
+            h="3rem"
+            onClick={deal}
+          >
+            확인
+          </Button>
+        ) : (
+          <Box bgColor="red.300" w="5rem" h="3rem">
+            가격정정
+          </Box>
+        )}
+      </VStack>
     </Box>
   );
 };

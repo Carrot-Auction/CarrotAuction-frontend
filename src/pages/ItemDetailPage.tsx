@@ -3,7 +3,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import { ItemDetail, ItemDetailProps } from "components/ItemDetail";
 import { ItemCard, ItemCardProps } from "components/ItemCard";
 import { useParams } from "react-router";
-import { deadlineItemList, newItemList } from "api";
+import { deadlineItemList, Item, newItemList } from "api";
 /*
 interface ItemProps {
   userId: number;
@@ -71,6 +71,7 @@ export const ItemDetailPage: React.FC = () => {
         content: itemIn.description, // 내용
         location: itemIn.location,
         user_id: itemIn.user_id,
+        item_id: itemIn.item_id,
       });
     })();
   }, []);
