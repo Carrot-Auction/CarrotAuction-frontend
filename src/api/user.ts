@@ -44,10 +44,8 @@ export const getMyFavorites = async (): Promise<ApiResponse<Item[]>> =>
 export const getMyItems = async (): Promise<ApiResponse<Item[]>> =>
   await apiRequest("GET", `/api/user/myItem`);
 
-export const getUserBittenItems = async (
-  userId: number
-): Promise<ApiResponse<ItemBider[]>> =>
-  await apiRequest("GET", `/api/user/${userId}/itemBider`);
+export const getMyBid = async (): Promise<ApiResponse<Item[]>> =>
+  await apiRequest("GET", `/api/user/myBid`);
 
 export const getUserBiderInfo = async (
   userId: number

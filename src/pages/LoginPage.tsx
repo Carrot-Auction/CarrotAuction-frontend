@@ -16,21 +16,12 @@ import useLogin from "hooks/useLogin";
 import { Link as RotueLink, useHistory } from "react-router-dom";
 
 export const LoginPage: React.FC = () => {
-  const loggedInLoadable = useAlreadyLoggedInState();
+  const isLoggedIn = useAlreadyLoggedInState();
   const history = useHistory();
-  switch (loggedInLoadable.state) {
-    case "loading": {
-      return null;
-    }
-    case "hasError":
-    case "hasValue": {
-      const isLoggedIn = loggedInLoadable.contents;
-      if (isLoggedIn) {
-        history.push("/");
-        return null;
-      } else return <LoginContent />;
-    }
-  }
+  if (isLoggedIn) {
+    history.push("/");
+    return null;
+  } else return <LoginContent />;
 };
 
 const LoginContent: React.FC = () => {

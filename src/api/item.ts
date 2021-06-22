@@ -11,6 +11,7 @@ export interface Item {
   user_id: number;
   favorite: boolean;
   likes: number;
+  duration: string;
 }
 
 export const getItemList = async (): Promise<ApiResponse<Item[]>> =>

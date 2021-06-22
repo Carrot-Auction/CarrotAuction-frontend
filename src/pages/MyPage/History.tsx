@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState, useEffect } from "react";
 import {
   Table,
   Thead,
@@ -14,8 +14,19 @@ import {
   Divider,
   Heading,
 } from "@chakra-ui/react";
+import { getMyBid, getMyItems, Item } from "api";
 
 const History: FC = () => {
+  const [myBids, setBids] = useState<Item[]>([]);
+  const [myItems, setItems] = useState<Item[]>([]);
+  useEffect(() => {
+    (async () => {
+      const bidResult = await getMyBid();
+      const itemsResult = await getMyItems();
+      setBids(bidResult.data);
+      setItems(itemsResult.data);
+    })();
+  }, []);
   return (
     <>
       <Heading size="md">거래이력</Heading>
@@ -29,10 +40,10 @@ const History: FC = () => {
 
         <TabPanels>
           <TabPanel>
-            <OrderTable />
+            <OrderTable items={myBids} />
           </TabPanel>
           <TabPanel>
-            <OrderTable />
+            <OrderTable items={myItems} />
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -40,7 +51,7 @@ const History: FC = () => {
   );
 };
 
-const OrderTable: FC = () => {
+const OrderTable: FC<{ items: Item[] }> = ({ items }) => {
   return (
     <Table variant="simple">
       <Thead>
@@ -50,36 +61,20 @@ const OrderTable: FC = () => {
           <Th w="10%" isNumeric>
             호가
           </Th>
-          <Th w="10%">등록일</Th>
           <Th w="10%">마감일</Th>
           <Th w="10%">판매자</Th>
         </Tr>
       </Thead>
       <Tbody>
-        <Tr>
-          <Td>우산</Td>
-          <Td>경매종료</Td>
-          <Td isNumeric>100원</Td>
-          <Td>2020.01.01</Td>
-          <Td>2020.01.01</Td>
-          <Td>홍길동</Td>
-        </Tr>
-        <Tr>
-          <Td>공구</Td>
-          <Td>경매중</Td>
-          <Td isNumeric>100원</Td>
-          <Td>2020.01.01</Td>
-          <Td>2020.01.01</Td>
-          <Td>철수</Td>
-        </Tr>
-        <Tr>
-          <Td>TV</Td>
-          <Td>경매종료</Td>
-          <Td isNumeric>100원</Td>
-          <Td>2020.01.01</Td>
-          <Td>2020.01.01</Td>
-          <Td>영희</Td>
-        </Tr>
+        {items.map(item => (
+          <Tr key={item.id}>
+            <Td>{item.title}</Td>
+            <Td>경매종료</Td>
+            <Td isNumeric>{item.start_price}</Td>
+            <Td>{item.duration}</Td>
+            <Td>{item.user_id}</Td>
+          </Tr>
+        ))}
       </Tbody>
     </Table>
   );
