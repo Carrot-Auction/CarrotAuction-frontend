@@ -41,7 +41,7 @@ export const ItemDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   console.log(id);
 
-  const getItem = async () =>
+  const getItem = async (): Promise<apiItem> =>
     (await fetch(`http://localhost:8080/api/item/itemDetail/${id}`)).json();
 
   const [item, setItem] = useState<ItemDetailProps>();
@@ -79,7 +79,7 @@ export const ItemDetailPage: React.FC = () => {
   return (
     <Flex justifyContent="center" bgColor="white">
       <Box bgColor="white" marginTop="2rem" w="46.78rem">
-        <ItemDetail {...item}></ItemDetail>
+        {item ? <ItemDetail {...item}></ItemDetail> : <Box></Box>}
         <Box marginLeft="4.5rem" w="37.78rem">
           <Box
             w="37.78rem"
