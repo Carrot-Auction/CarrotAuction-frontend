@@ -33,9 +33,13 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
     <Flex h="calx(100vh - 6rem)" justifyContent="center" flexDir="column">
       <Box display="flex" bgColor="white" minW="46.78rem">
         <Box marginTop="13rem">
-          <Button display="inline-block" onClick={onDecrease} bgColor="white">
-            <Icon as={AiFillCaretLeft} w="1.5rem" h="1.5rem" />
-          </Button>
+          {props.imgurls !== null ? (
+            <Button display="inline-block" onClick={onDecrease} bgColor="white">
+              <Icon as={AiFillCaretLeft} w="1.5rem" h="1.5rem" />
+            </Button>
+          ) : (
+            <Box w="1.5rem" h="1.5rem" bgColor="white"></Box>
+          )}
         </Box>
         <Box
           w="full"
@@ -47,7 +51,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
         >
           <Box w="parent" textAlign="center">
             <Image
-              src={props.imgurls ? props.imgurls[state] : defualt}
+              src={props.imgurls !== null ? props.imgurls[state] : defualt}
               w="46.78rem"
               h="25rem"
               display="inline-block"
@@ -55,7 +59,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
               borderRadius="1rem 1rem 1rem 1rem"
             />
             <Box position="absolute" left="50%" top="55.5%">
-              {state + 1}/{props.imgurls.length}
+              {props.imgurls !== null ? (state + 1) / props.imgurls.length : 1}
             </Box>
           </Box>
           <Box w="parent">
@@ -128,9 +132,13 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
           </Box>
         </Box>
         <Box marginTop="13rem">
-          <Button display="inline-block" onClick={onIncrease} bgColor="white">
-            <Icon as={AiFillCaretRight} w="1.5rem" h="1.5rem" />
-          </Button>
+          {props.imgurls !== null ? (
+            <Button display="inline-block" onClick={onIncrease} bgColor="white">
+              <Icon as={AiFillCaretRight} w="1.5rem" h="1.5rem" />
+            </Button>
+          ) : (
+            <Box w="1.5rem" h="1.5rem" bgColor="white"></Box>
+          )}
         </Box>
       </Box>
     </Flex>
