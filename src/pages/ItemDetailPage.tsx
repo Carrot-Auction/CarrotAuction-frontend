@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, HStack } from "@chakra-ui/react";
 import { ItemDetail, ItemDetailProps } from "components/ItemDetail";
 import { ItemCard, ItemCardProps } from "components/ItemCard";
 import { useParams } from "react-router";
@@ -117,16 +117,21 @@ export const ItemDetailPage: React.FC = () => {
             이 상품과 함께 봤어요
           </Box>
           <Box marginTop="2rem">
-            <Box display="flex" justifyContent="space-between">
-              <ItemCard {...Card}></ItemCard>
-              <ItemCard {...Card}></ItemCard>
-              <ItemCard {...Card}></ItemCard>
-            </Box>
-            <Box display="flex" marginTop="1rem" justifyContent="space-between">
-              <ItemCard {...Card}></ItemCard>
-              <ItemCard {...Card}></ItemCard>
-              <ItemCard {...Card}></ItemCard>
-            </Box>
+            <HStack alignItems="flex-start" justifyContent="center" spacing={3}>
+              {newItems.map(item => (
+                <ItemCard key={item.id} {...item} price={item.start_price} />
+              ))}
+            </HStack>
+            <HStack
+              alignItems="flex-start"
+              marginTop="1rem"
+              justifyContent="center"
+              spacing={5}
+            >
+              {newItems.map(item => (
+                <ItemCard key={item.id} {...item} price={item.start_price} />
+              ))}
+            </HStack>
           </Box>
           <Box
             w="37.78rem"
