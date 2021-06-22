@@ -3,6 +3,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import { ItemDetail, ItemDetailProps } from "components/ItemDetail";
 import { ItemCard, ItemCardProps } from "components/ItemCard";
 import { useParams } from "react-router";
+import { DateTime } from "luxon";
 /*
 interface ItemProps {
   userId: number;
@@ -74,11 +75,10 @@ export const ItemDetailPage: React.FC = () => {
   const Card: ItemCardProps = {
     id: 1,
     title: "상품이름12345678901234567890",
-    url: "https://via.placeholder.com/150",
+    duration: DateTime.now().toISO(),
     location: "상도동",
     price: 1000,
     likes: 12,
-    dday: 5,
     favorite: false,
   };
   return (

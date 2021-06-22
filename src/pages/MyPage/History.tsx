@@ -72,7 +72,7 @@ const OrderTable: FC<{ items: Item[] }> = ({ items }) => {
             <Td>판매중</Td>
             <Td isNumeric>{item.start_price}</Td>
             <Td>{item.duration}</Td>
-            <Td>{item.user_id}</Td>
+            <Td>{item.nickname}</Td>
           </Tr>
         ))}
       </Tbody>

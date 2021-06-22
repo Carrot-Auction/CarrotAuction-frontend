@@ -1,84 +1,43 @@
 import { Heading, HStack, VStack } from "@chakra-ui/layout";
 import { Box, Divider, IconButton, Tooltip } from "@chakra-ui/react";
+import { deadlineItemList, Item, newItemList } from "api";
 import { ItemCard } from "components";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { useHistory } from "react-router";
 
 export const MainPage: React.FC = () => {
   const history = useHistory();
-  const dummy = [
-    {
-      title: "상품이름12345678901234567890",
-      imgurl: "https://via.placeholder.com/150",
-      location: "상도동",
-      price: 1000,
-      comments: 12,
-      likes: 12,
-      dday: 5,
-      favorite: false,
-    },
-    {
-      title: "상품이름12345678901234567890",
-      imgurl: "https://via.placeholder.com/150",
-      location: "상도동",
-      price: 1000,
-      comments: 12,
-      likes: 12,
-      dday: 5,
-      favorite: false,
-    },
-    {
-      title: "상품이름12345678901234567890",
-      imgurl: "https://via.placeholder.com/150",
-      location: "상도동",
-      price: 1000,
-      comments: 12,
-      likes: 12,
-      dday: 5,
-      favorite: false,
-    },
-    {
-      title: "상품이름12345678901234567890",
-      imgurl: "https://via.placeholder.com/150",
-      location: "상도동",
-      price: 1000,
-      comments: 12,
-      likes: 12,
-      dday: 5,
-      favorite: false,
-    },
-    {
-      title: "상품이름12345678901234567890",
-      imgurl: "https://via.placeholder.com/150",
-      location: "상도동",
-      price: 1000,
-      comments: 12,
-      likes: 12,
-      dday: 5,
-      favorite: false,
-    },
-  ];
+  const [newItems, setNewItems] = useState<Item[]>([]);
+  const [items, setItems] = useState<Item[]>([]);
+  useEffect(() => {
+    (async () => {
+      const itemsResult = await deadlineItemList();
+      const newItemsResult = await newItemList();
+      setItems(itemsResult.data);
+      setNewItems(newItemsResult.data);
+    })();
+  }, []);
   return (
     <>
       <Box maxW="1080px" m="auto" p="1rem">
         <VStack spacing={10}>
-          <Box>
+          <Box w="full">
             <Heading size="md">마감임박 상품</Heading>
             <Divider mb={2} mt={2} />
             <HStack alignItems="flex-start" justifyContent="center" spacing={5}>
-              {dummy.map((item, idx) => (
-                <ItemCard key={idx} id={idx} {...item} />
+              {items.map(item => (
+                <ItemCard key={item.id} price={item.start_price} {...item} />
               ))}
             </HStack>
           </Box>
 
-          <Box>
+          <Box w="full">
             <Heading size="md">최근 등록된 상품</Heading>
             <Divider mb={2} mt={2} />
             <HStack alignItems="flex-start" justifyContent="center" spacing={5}>
-              {dummy.map((item, idx) => (
-                <ItemCard key={idx} id={idx} {...item} />
+              {newItems.map(item => (
+                <ItemCard key={item.id} {...item} price={item.start_price} />
               ))}
             </HStack>
           </Box>

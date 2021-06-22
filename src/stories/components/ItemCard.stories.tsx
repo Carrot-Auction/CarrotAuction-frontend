@@ -18,7 +18,6 @@ Default.args = {
   location: "상도동",
   price: 1000,
   likes: 12,
-  dday: 5,
   favorite: false,
   /* favoritHandle 필요 */
 };

@@ -13,14 +13,8 @@ export const SearchResultPage: React.FC = () => {
       const { data } = await searchItem(query.get("q"));
       setResults(
         data.map(el => ({
-          title: el.title,
-          location: "서울",
-          id: el.id,
+          ...el,
           price: el.start_price,
-          favorite: el.favorite,
-          dday: 0,
-          imgurl: "https://via.placeholder.com/150",
-          likes: el.likes,
         }))
       );
     })();

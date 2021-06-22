@@ -6,7 +6,6 @@ import {
   MyPage,
   RegisterPage,
   SearchResultPage,
-  UserProfilePage,
 } from "pages";
 import React from "react";
 
@@ -41,10 +40,6 @@ export const routes: Rotue[] = [
   {
     path: "/items/:id",
     component: ItemDetailPage,
-  },
-  {
-    path: "/users/:id",
-    component: UserProfilePage,
   },
   {
     path: "/addItem",

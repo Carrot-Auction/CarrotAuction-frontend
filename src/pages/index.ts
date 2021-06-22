@@ -4,5 +4,4 @@ export * from "./RegisterPage";
 export * from "./SearchResultPage";
 export * from "./MyPage";
 export * from "./ItemDetailPage";
-export * from "./UserProfilePage";
 export * from "./AddItemPage";

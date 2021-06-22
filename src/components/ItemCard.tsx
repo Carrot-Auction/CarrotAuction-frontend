@@ -12,6 +12,7 @@ import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { toggleFavorite } from "api";
 import noimage from "../assets/noimage.jpg";
+import { DateTime } from "luxon";
 
 const FavoriteButton: React.FC<{ favorite: boolean }> = ({ favorite }) => {
   return (
@@ -64,7 +65,7 @@ export type ItemCardProps = {
   /**
    * 남은 일 수
    */
-  dday: number;
+  duration: string;
 
   id: number;
 
@@ -135,7 +136,9 @@ export const ItemCard: FC<ItemCardProps> = props => {
           color="gray.500"
           fontSize="0.825rem"
         >
-          <Text fontWeight="semibold">{`D-${props.dday}`}</Text>
+          <Text fontWeight="semibold">{`D-${
+            DateTime.fromISO(props.duration).diffNow().days
+          }`}</Text>
           <HStack justifyContent="flex-end">
             <Box>
               <Icon as={AiOutlineHeart} />

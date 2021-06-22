@@ -10,14 +10,8 @@ const Favorite: FC = () => {
       const { data } = await getMyFavorites();
       setFavorites(
         data.map(el => ({
-          title: el.title,
-          location: "서울",
-          id: el.id,
+          ...el,
           price: el.start_price,
-          dday: 0,
-          imgurl: "https://via.placeholder.com/150",
-          likes: el.likes,
-          favorite: el.favorite,
         }))
       );
     })();
