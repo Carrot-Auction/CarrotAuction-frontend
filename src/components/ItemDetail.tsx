@@ -21,6 +21,8 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
   function mod(n: number, m: number) {
     return ((n % m) + m) % m;
   }
+  const defualt =
+    "https://ceppp.ca/wp-content/uploads/ceppp-profil-generique-1000x1000px-1.jpg";
   const onIncrease = useCallback(() => {
     setState(mod(state + 1, props.imgurls.length));
   }, [props.imgurls, state]);
@@ -45,11 +47,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
         >
           <Box w="parent" textAlign="center">
             <Image
-              src={
-                props.imgurls
-                  ? props.imgurls[state]
-                  : "https://ceppp.ca/wp-content/uploads/ceppp-profil-generique-1000x1000px-1.jpg"
-              }
+              src={props.imgurls ? props.imgurls[state] : defualt}
               w="46.78rem"
               h="25rem"
               display="inline-block"
