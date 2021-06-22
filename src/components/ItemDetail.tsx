@@ -240,7 +240,7 @@ export const DealWindow: FC<dealProps> = props => {
     <Box w="20rem" h="10rem">
       <VStack justifyContent="center">
         <Box display="flex" w="20rem" bgColor="green">
-          <Box marginLeft="5rem" fontSize="3rem" color="white">
+          <Box marginLeft="1rem" fontSize="3rem" color="white">
             제시 금액
           </Box>
           <Button marginLeft="13rem" bgColor="orange" onClick={cancel}>
