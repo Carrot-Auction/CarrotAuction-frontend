@@ -65,7 +65,6 @@ export const AddItemPage: FC = () => {
   };
 
   const [values, setValues] = useState(initialValues);
-  const [urls, setUrls] = useState(null);
   const handleChange = useCallback(
     e => {
       const { name, value } = e.target;
@@ -95,7 +94,6 @@ export const AddItemPage: FC = () => {
         })
       ).text();
       urlarray[i] = url;
-      setUrls(urlarray);
       const reader = new FileReader();
       reader.onload = e => {
         fileURLs[i] = reader.result;
@@ -103,13 +101,12 @@ export const AddItemPage: FC = () => {
       };
       reader.readAsDataURL(fie);
     }
-    setValues({ ...values, pictures: urls });
+    setValues({ ...values, pictures: urlarray });
   };
 
   const handleFileButtonClick = e => {
     fileRef.current.click();
   };
-
   const handleSubmit = useCallback(
     async e => {
       (
@@ -124,7 +121,7 @@ export const AddItemPage: FC = () => {
               buy_year: values.buyYear,
               buy_price: values.buyPrice,
               statue: values.state,
-              multipartFiles: values.pictures,
+              url: values.pictures,
               category: values.categori,
               duration: values.date,
               start_price: values.startPrice,
