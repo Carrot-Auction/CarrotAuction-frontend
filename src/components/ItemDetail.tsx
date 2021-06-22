@@ -2,6 +2,7 @@ import React, { FC, useState, useCallback } from "react";
 import { Box, Image, Flex, Button, Icon, Avatar } from "@chakra-ui/react";
 import { AiFillCaretLeft, AiFillCaretRight } from "react-icons/ai";
 import { Chat } from "components/Chat";
+import { useCurrentUserState } from "atoms";
 
 export type ItemDetailProps = {
   imgurls: string[]; // 등록한 이미지 리스트
@@ -14,9 +15,11 @@ export type ItemDetailProps = {
   defualtprice: number; // 시작가격
   content: string; // 내용
   location: string; // 판매자 위치
+  user_id: number;
 };
 
 export const ItemDetail: FC<ItemDetailProps> = props => {
+  const [userState] = useCurrentUserState();
   const [state, setState] = useState(0);
   function mod(n: number, m: number) {
     return ((n % m) + m) % m;
@@ -81,7 +84,6 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                       1:1채팅
                     </Button>
                   </Box>
-                  <Box>남은시간: {props.time}</Box>
                 </Box>
                 <Box marginLeft="0.4rem" marginTop="0.1rem">
                   <Box fontWeight="500" fontSize="1.1rem">
@@ -93,20 +95,33 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                 </Box>
               </Box>
               <Box textAlign="right">
-                <Box>시작가격: {props.defualtprice}</Box>
-                <Box>현재가격: {props.nowprice}</Box>
-                <Button
-                  filter="drop-shadow(1px 1px 1px gray)"
-                  colorScheme="blue"
-                  marginTop="0.3rem"
-                  w="7.5rem"
-                  h="2.5rem"
-                >
-                  경매참가
-                </Button>
+                <Box>시작가격: {props.defualtprice}원</Box>
+                <Box>현재가격: {props.nowprice}원</Box>
+                {userState.id !== props.user_id ? (
+                  <Button
+                    filter="drop-shadow(1px 1px 1px gray)"
+                    colorScheme="blue"
+                    marginTop="0.3rem"
+                    w="7.5rem"
+                    h="2.5rem"
+                  >
+                    경매참가
+                  </Button>
+                ) : (
+                  <Box
+                    filter="drop-shadow(1px 1px 1px gray)"
+                    colorScheme="gray"
+                    marginTop="0.3rem"
+                    w="7.5rem"
+                    h="2.5rem"
+                  >
+                    경매참가불가
+                  </Box>
+                )}
               </Box>
             </Box>
           </Box>
+          <Box>남은기간: {props.time}일</Box>
           <Box
             w="parent"
             borderTopColor="gray.200"

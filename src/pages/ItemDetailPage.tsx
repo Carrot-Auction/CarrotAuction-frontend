@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { ItemDetail, ItemDetailProps } from "components/ItemDetail";
 import { ItemCard, ItemCardProps } from "components/ItemCard";
 import { useParams } from "react-router";
-import { DateTime } from "luxon";
 /*
 interface ItemProps {
   userId: number;
@@ -36,6 +35,8 @@ type apiItem = {
   description: string; // 내용
   location: string;
   images: string[];
+  item_id: number;
+  user_id: number;
 };
 
 export const ItemDetailPage: React.FC = () => {
@@ -50,6 +51,7 @@ export const ItemDetailPage: React.FC = () => {
     ).data;
 
   const [item, setItem] = useState<ItemDetailProps>();
+  const [itemIn, setItemIn] = useState<apiItem>();
 
   useEffect(() => {
     (async () => {
@@ -67,6 +69,7 @@ export const ItemDetailPage: React.FC = () => {
         defualtprice: itemIn.start_price, // 시작가격
         content: itemIn.description, // 내용
         location: itemIn.location,
+        user_id: itemIn.user_id,
       });
     })();
   }, []);
@@ -74,10 +77,11 @@ export const ItemDetailPage: React.FC = () => {
   const Card: ItemCardProps = {
     id: 1,
     title: "상품이름12345678901234567890",
-    duration: DateTime.now().toISO(),
+    imgurl: "https://via.placeholder.com/150",
     location: "상도동",
     price: 1000,
     likes: 12,
+    dday: 5,
     favorite: false,
   };
   return (
@@ -93,7 +97,7 @@ export const ItemDetailPage: React.FC = () => {
             borderWidth="0.1rem"
             marginTop="1.5em"
           ></Box>
-          <Box bgColor="gray">
+          <Box>
             {item ? <ItemDetail {...item}></ItemDetail> : <Box>로딩중...</Box>}
           </Box>
           <Box fontWeight="600" fontSize="1rem" marginTop="2rem">
