@@ -114,7 +114,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
               <Box textAlign="right">
                 <Box>시작가격: {props.defualtprice}원</Box>
                 <Box>현재가격: {props.nowprice}원</Box>
-                {userState.id !== props.user_id ? (
+                {props.user_id ? (
                   <Button
                     filter="drop-shadow(1px 1px 1px gray)"
                     colorScheme="blue"
@@ -137,13 +137,17 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                   </Box>
                 )}
               </Box>
-              <Box position="absolute" left="50%" top="50%">
-                <DealWindow
-                  item_id={props.item_id}
-                  nowprice={props.nowprice}
-                  user_id={props.user_id}
-                />
-              </Box>
+              {showdeal ? (
+                <Box position="absolute" left="40%" top="50%" bgColor="gray">
+                  <DealWindow
+                    item_id={props.item_id}
+                    nowprice={props.nowprice}
+                    user_id={props.user_id}
+                  />
+                </Box>
+              ) : (
+                <></>
+              )}
             </Box>
           </Box>
           <Box>남은기간: {props.time}일</Box>
@@ -223,7 +227,7 @@ export const DealWindow: FC<dealProps> = props => {
     showdealSet(true);
   };
   return (
-    <Box w="30rem" h="20rem">
+    <Box w="30rem" h="30rem">
       <Input
         name="deal_price"
         value={values.deal_price}
@@ -233,11 +237,11 @@ export const DealWindow: FC<dealProps> = props => {
         onChange={onChage}
       />
       {props.nowprice < values.deal_price ? (
-        <Button w="8rem" h="5rem" onclick={deal}>
+        <Button bgColor="blue" w="8rem" h="5rem" onclick={deal}>
           확인
         </Button>
       ) : (
-        <Box w="8rem" h="5rem">
+        <Box bgColor="red" w="8rem" h="5rem">
           가격정정
         </Box>
       )}
