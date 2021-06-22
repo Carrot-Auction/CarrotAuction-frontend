@@ -31,6 +31,9 @@ export const ItemDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   console.log(id);
 
+  const getItem = async (): Promise<ItemDetailProps> =>
+    (await fetch(`http://localhost:8080/itemDetail/${id}`)).json();
+
   const [item, setItem] = useState<ItemDetailProps>();
   useEffect(() => {
     (async () => {
