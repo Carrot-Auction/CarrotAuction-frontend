@@ -211,7 +211,7 @@ export const DealWindow: FC<dealProps> = props => {
   const onChage = useCallback(
     e => {
       const { name, value } = e.target;
-      valuesSet({ ...values, [name]: value });
+      valuesSet({ ...values, [name]: parseInt(value) });
     },
     [values]
   );
