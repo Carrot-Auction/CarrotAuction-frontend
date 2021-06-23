@@ -226,7 +226,7 @@ export const DealWindow: FC<dealProps> = props => {
           data: {
             item_id: values.item_id,
             seller: values.user_id,
-            deal_price: values.deal_price,
+            price: values.deal_price,
           },
         }),
       })
