@@ -158,7 +158,9 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
               )}
             </Box>
           </Box>
-          <Box>{`D-${DateTime.fromISO(props.time).diffNow().days}`}</Box>
+          <Box fontSize="3rem" color="red">{`D-${
+            DateTime.fromISO(props.time).diffNow().days
+          }`}</Box>
           <Box
             w="parent"
             borderTopColor="gray.200"

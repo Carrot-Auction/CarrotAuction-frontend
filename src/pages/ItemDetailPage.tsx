@@ -113,6 +113,15 @@ export const ItemDetailPage: React.FC = () => {
           <Box>
             {item ? <ItemDetail {...item}></ItemDetail> : <Box>로딩중...</Box>}
           </Box>
+          <Box
+            w="37.78rem"
+            borderTopColor="gray.200"
+            borderLeft="0"
+            borderRight="0"
+            borderBottom="0"
+            borderWidth="0.1rem"
+            marginTop="1.5em"
+          ></Box>
           <Box fontWeight="600" fontSize="1rem" marginTop="2rem">
             새로 나온 상품이예요.
           </Box>
