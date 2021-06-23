@@ -32,6 +32,7 @@ export type ItemDetailProps = {
 };
 
 export const ItemDetail: FC<ItemDetailProps> = props => {
+  const login = useAlreadyLoggedInState();
   const [userState] = useCurrentUserState();
   const [state, setState] = useState(0);
   const [showdeal, showdealSet] = useRecoilState(ShowDeal);
@@ -76,7 +77,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
               margin="0 auto"
               borderRadius="1rem 1rem 1rem 1rem"
             />
-            <Box position="absolute" left="50%" top="55.5%">
+            <Box position="absolute" left="50%" top="52%">
               {state + 1}/ {props.imgurls.length}
             </Box>
           </Box>
@@ -116,7 +117,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
               <Box textAlign="right">
                 <Box>시작가격: {props.defualtprice}원</Box>
                 <Box>현재가격: {props.nowprice}원</Box>
-                {props.user_id ? (
+                {props.user_id !== userState.id ? (
                   <Button
                     filter="drop-shadow(1px 1px 1px gray)"
                     colorScheme="blue"
@@ -130,12 +131,12 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
                 ) : (
                   <Box
                     filter="drop-shadow(1px 1px 1px gray)"
-                    colorScheme="gray"
+                    colorScheme="red"
                     marginTop="0.3rem"
                     w="7.5rem"
                     h="2.5rem"
                   >
-                    경매참가불가
+                    참가불가
                   </Box>
                 )}
               </Box>
@@ -158,7 +159,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
               )}
             </Box>
           </Box>
-          <Box fontSize="3rem" color="red">{`D-${
+          <Box fontSize="2rem" color="red">{`D-${
             DateTime.fromISO(props.time).diffNow().days
           }`}</Box>
           <Box
@@ -243,11 +244,8 @@ export const DealWindow: FC<dealProps> = props => {
   return (
     <Box w="20rem" h="10rem">
       <VStack justifyContent="center">
-        <Box display="flex" w="20rem" bgColor="green">
-          <Box marginLeft="7rem" fontSize="2rem" color="white">
-            제시 금액
-          </Box>
-          <Button marginLeft="3rem" bgColor="green" onClick={cancel}>
+        <Box w="20rem" bgColor="white">
+          <Button marginLeft="17rem" bgColor="white" onClick={cancel}>
             X
           </Button>
         </Box>

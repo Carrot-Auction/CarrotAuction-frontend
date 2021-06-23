@@ -110,7 +110,7 @@ export const ItemDetailPage: React.FC = () => {
             borderWidth="0.1rem"
             marginTop="1.5em"
           ></Box>
-          <Box>
+          <Box marginLeft="0">
             {item ? <ItemDetail {...item}></ItemDetail> : <Box>로딩중...</Box>}
           </Box>
           <Box

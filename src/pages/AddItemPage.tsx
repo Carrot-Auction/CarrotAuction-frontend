@@ -147,6 +147,11 @@ export const AddItemPage: FC = () => {
   // alert(err.message);
   // }
   //};
+  const [showRecomand, showRecomandSet] = useState(false);
+  const recomand = e => {
+    showRecomandSet(true);
+  };
+  const reco = 44000;
   return (
     <Flex justifyContent="center" flexDir="column" bgColor="white">
       <Box m="0 auto" w="47rem" p="1rem" marginTop="8rem">
@@ -260,6 +265,16 @@ export const AddItemPage: FC = () => {
                 </FormControl>
               </Flex>
             </Box>
+            <Flex>
+              <Button onClick={recomand}>추천가격</Button>
+              {showRecomand ? (
+                <Box marginLeft="1rem" marginTop="0.5rem">
+                  44000원
+                </Box>
+              ) : (
+                <></>
+              )}
+            </Flex>
             <FormControl isRequired id="mainTitle" w="full">
               <FormLabel>제목</FormLabel>
               <Input
