@@ -231,7 +231,8 @@ export const DealWindow: FC<dealProps> = props => {
         }),
       })
     ).json();
-    showdealSet(true);
+    console.log(values);
+    showdealSet(false);
   };
   const cancel = e => {
     showdealSet(false);

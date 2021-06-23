@@ -114,7 +114,7 @@ export const ItemDetailPage: React.FC = () => {
             {item ? <ItemDetail {...item}></ItemDetail> : <Box>로딩중...</Box>}
           </Box>
           <Box fontWeight="600" fontSize="1rem" marginTop="2rem">
-            이 상품과 함께 봤어요
+            새로 나온 상품이예요.
           </Box>
           <Box marginTop="2rem">
             <HStack alignItems="flex-start" justifyContent="center" spacing={3}>
@@ -126,7 +126,7 @@ export const ItemDetailPage: React.FC = () => {
               alignItems="flex-start"
               marginTop="1rem"
               justifyContent="center"
-              spacing={5}
+              spacing={3}
             >
               {newItems.map(item => (
                 <ItemCard key={item.id} {...item} price={item.start_price} />
