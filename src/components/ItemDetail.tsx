@@ -14,6 +14,7 @@ import { Chat } from "components/Chat";
 import { useAlreadyLoggedInState, useCurrentUserState } from "atoms";
 import { ShowDeal } from "atoms/dealState";
 import { useRecoilState } from "recoil";
+import { DateTime } from "luxon";
 
 export type ItemDetailProps = {
   imgurls: string[]; // 등록한 이미지 리스트
@@ -157,7 +158,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
               )}
             </Box>
           </Box>
-          <Box>남은기간: {props.time}일</Box>
+          <Box>{`D-${DateTime.fromISO(props.time).diffNow().days}`}</Box>
           <Box
             w="parent"
             borderTopColor="gray.200"

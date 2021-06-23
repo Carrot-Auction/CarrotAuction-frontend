@@ -117,21 +117,22 @@ export const ItemDetailPage: React.FC = () => {
             새로 나온 상품이예요.
           </Box>
           <Box marginTop="2rem">
-            <HStack alignItems="flex-start" justifyContent="center" spacing={3}>
-              {newItems.map(item => (
-                <ItemCard key={item.id} {...item} price={item.start_price} />
-              ))}
-            </HStack>
-            <HStack
-              alignItems="flex-start"
-              marginTop="1rem"
-              justifyContent="center"
-              spacing={3}
-            >
-              {newItems.map(item => (
-                <ItemCard key={item.id} {...item} price={item.start_price} />
-              ))}
-            </HStack>
+            <Box marginTop="2rem" marginBottom="2rem">
+              <Box display="flex" justifyContent="space-between">
+                <ItemCard {...Card}></ItemCard>
+                <ItemCard {...Card}></ItemCard>
+                <ItemCard {...Card}></ItemCard>
+              </Box>
+              <Box
+                display="flex"
+                marginTop="1rem"
+                justifyContent="space-between"
+              >
+                <ItemCard {...Card}></ItemCard>
+                <ItemCard {...Card}></ItemCard>
+                <ItemCard {...Card}></ItemCard>
+              </Box>
+            </Box>
           </Box>
           <Box
             w="37.78rem"
