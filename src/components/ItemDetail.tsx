@@ -117,7 +117,7 @@ export const ItemDetail: FC<ItemDetailProps> = props => {
               <Box textAlign="right">
                 <Box>시작가격: {props.defualtprice}원</Box>
                 <Box>현재가격: {props.nowprice}원</Box>
-                {props.user_id !== userState.id ? (
+                {props.user_id ? (
                   <Button
                     filter="drop-shadow(1px 1px 1px gray)"
                     colorScheme="blue"
