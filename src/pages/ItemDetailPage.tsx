@@ -4,6 +4,7 @@ import { ItemDetail, ItemDetailProps } from "components/ItemDetail";
 import { ItemCard, ItemCardProps } from "components/ItemCard";
 import { useParams } from "react-router";
 import { deadlineItemList, Item, newItemList } from "api";
+import { useAlreadyLoggedInState } from "atoms";
 /*
 interface ItemProps {
   userId: number;
@@ -43,7 +44,7 @@ type apiItem = {
 export const ItemDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   console.log(id);
-
+  const login = useAlreadyLoggedInState();
   const getItem = async (): Promise<apiItem> =>
     (
       await (
